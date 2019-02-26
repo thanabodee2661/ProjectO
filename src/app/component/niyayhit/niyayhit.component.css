@@ -1,0 +1,21 @@
+.div-niyayhit{
+    margin-top: 25px;
+    border-style: solid;
+    width: 100%;
+    padding: 25px;
+}
+
+#btn-search{
+    width: 100%;
+}
+
+.card-img img{
+    width: 120px;
+    height: 150px;
+    border: 1px solid;
+}
+
+img{
+    vertical-align: middle;
+    padding: 5px;
+}

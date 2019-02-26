@@ -1,0 +1,41 @@
+<div class="div-list-your-niyay">
+  <div class="div-main">
+    <div class="card">
+      <div class="card-header">
+        list your niyay
+      </div>
+      <div class="card-body">
+        <div *ngFor="let book of books; let i = index">
+          <div class="card-body-niyay" *ngIf="i%2==0" style="float: left;">
+            <div class="card-img">
+              <img [src]="book.img_book" />
+            </div>
+            <div>
+              {{book.name_fiction}}
+            </div>
+          </div>
+          <div class="card-body-niyay" *ngIf="i%2==1" style="float: right;">
+            <div class="card-img">
+              <img [src]="book.img_book" />
+            </div>
+            <div>
+              {{book.name_fiction}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<div class="card-body-niyay" style="float: left;">
+  <div class="card-img">
+    <img [src]="imagePreview" />
+  </div>
+</div>
+<div class="card-body-niyay" style="float: right;">
+  <div class="card-img">
+    <img [src]="imagePreview" />
+  </div>
+</div> -->

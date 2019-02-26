@@ -1,0 +1,43 @@
+<div class="div-create-niyay">
+  <div class="div-main">
+    <div class="card" id="card">
+      <div class="card-header" style="text-align: center; font-size: 20px;">
+        <b>สร้างนิยายของคุณ</b>
+      </div>
+      <div class="card-body">
+        <div class="img-book-name-book">
+          <div class="card-img">
+            <img [src]="imagePreview" />
+          </div>
+          <div class="book-name">
+            <div class="book-name-text">
+              <b>ชื่อเรื่อง</b>
+            </div>
+            <div class="input-group flex-nowrap" id="input-group-name">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping"><i class="fas fa-address-book"></i></span>
+              </div>
+              <input type="text" class="form-control" id="input-group-name" placeholder="Book Name" aria-label="Book Name" [(ngModel)]="book.name_fiction">
+            </div>
+            <div class="btn-upload">
+              <input type="file" #file (change)="changeFile($event);" style="display: none;" />
+              <button type="button" class="btn btn-success" (click)="file.click();"><i class="fas fa-upload"></i> Upload</button>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <div class="book-info-name">
+            <b>เนื้อเรื่องย่อ</b>
+          </div>
+          <div class="book-info">
+            <textarea class="form-control" id="text-area-book-info" [(ngModel)]="book.preview"></textarea>
+          </div>
+          <div clas="book-info-btn">
+            <button type="button" class="btn btn-primary" (click)="createBook();"><i class="fas fa-plus-square"></i> สร้าง</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

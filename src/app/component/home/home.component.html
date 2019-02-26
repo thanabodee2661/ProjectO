@@ -1,0 +1,82 @@
+<!-- <p-toast [style]="{marginTop: '80px'}"></p-toast> -->
+
+<div style="margin-top: 25px;">
+  <p-carousel headerText="แนะนำ" [value]="cars">
+    <ng-template let-car pTemplate="item">
+      <div class="ui-grid ui-grid-responsive" style="text-align: center;">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-12"><img src="../../../assets/img/book.png" width="60"></div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">Vin</div>
+          <div class="ui-grid-col-6">{{car.vin}}</div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">Year</div>
+          <div class="ui-grid-col-6">{{car.year}}</div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-6">Color</div>
+          <div class="ui-grid-col-6">{{car.color}}</div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-12">
+            <button type="button" pButton icon="pi pi-search" (click)="selectCar(car)"></button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</div>
+
+<div style="width: 100%; margin-top: 25px;">
+  <div style="width: 49%; background-color: cornsilk; position: relative; border-style: solid; padding: 10px;"
+    class="float-left">
+    <h2>นิยายฮิต</h2>
+    <div style="overflow: hidden; word-break:break-all;">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">ประเภท</span>
+        </div>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="card-body">
+          card 1
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="width: 49%; background-color:cornsilk; position: relative; border-style: solid; padding: 10px;"
+    class="float-right">
+    <h2>นิยายล่าสุด</h2>
+    <div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">ประเภท</span>
+        </div>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <hr />
+      <div class="card">
+        <div class="card-body">
+          card 1
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

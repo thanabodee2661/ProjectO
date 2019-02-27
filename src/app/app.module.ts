@@ -30,6 +30,8 @@ import { UserService } from './service/user/user.service';
 import { CreateyourniyayComponent } from './component/createyourniyay/createyourniyay.component';
 import { BookService } from './service/book/book.service';
 import { ListyourniyayComponent } from './component/listyourniyay/listyourniyay.component';
+import { CreateepisodeComponent } from './component/createepisode/createepisode.component';
+import { EpisodelistComponent } from './component/episodelist/episodelist.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { ListyourniyayComponent } from './component/listyourniyay/listyourniyay.
     SearchComponent,
     ProfileComponent,
     CreateyourniyayComponent,
-    ListyourniyayComponent
+    ListyourniyayComponent,
+    CreateepisodeComponent,
+    EpisodelistComponent
   ],
   imports: [
     BrowserModule,

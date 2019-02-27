@@ -11,6 +11,8 @@ import { SearchComponent } from './component/search/search.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { CreateyourniyayComponent } from './component/createyourniyay/createyourniyay.component';
 import { ListyourniyayComponent } from './component/listyourniyay/listyourniyay.component';
+import { EpisodelistComponent } from './component/episodelist/episodelist.component';
+import { CreateepisodeComponent } from './component/createepisode/createepisode.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -32,7 +34,9 @@ const routes: Routes = [
         path: 'profile', component: ProfileComponent,
         children: [
           { path: 'createyourniyay', component: CreateyourniyayComponent },
-          { path: 'listyourniyay', component: ListyourniyayComponent }
+          { path: 'listyourniyay', component: ListyourniyayComponent },
+          { path: 'episodelist', component: EpisodelistComponent },
+          { path: 'createepisode', component: CreateepisodeComponent }
         ]
       }
     ]

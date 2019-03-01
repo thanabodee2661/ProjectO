@@ -32,6 +32,9 @@ import { BookService } from './service/book/book.service';
 import { ListyourniyayComponent } from './component/listyourniyay/listyourniyay.component';
 import { CreateepisodeComponent } from './component/createepisode/createepisode.component';
 import { EpisodelistComponent } from './component/episodelist/episodelist.component';
+import { EpisodeComponent } from './component/episode/episode.component';
+import { UpdateepisodeComponent } from './component/updateepisode/updateepisode.component';
+import { EpisodeService } from './service/episode/episode.service';
 
 
 @NgModule({
@@ -50,7 +53,9 @@ import { EpisodelistComponent } from './component/episodelist/episodelist.compon
     CreateyourniyayComponent,
     ListyourniyayComponent,
     CreateepisodeComponent,
-    EpisodelistComponent
+    EpisodelistComponent,
+    EpisodeComponent,
+    UpdateepisodeComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +72,8 @@ import { EpisodelistComponent } from './component/episodelist/episodelist.compon
     LoginService,
     JwtService,
     UserService,
-    BookService
+    BookService,
+    EpisodeService
   ],
   bootstrap: [AppComponent]
 })

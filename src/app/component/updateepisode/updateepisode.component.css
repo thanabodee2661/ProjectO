@@ -14,17 +14,21 @@
   float: right;
 }
 
-.episode-list{
+.episode-list {
   width: 100%;
   display: block;
 }
 
-#btn-create-episode{
+#btn-create-episode {
   width: 100%;
 }
 
-.div-bin-create-episode{
+.div-bin-create-episode {
   width: 100%;
   border: 2px solid;
   position: absolute;
+}
+
+#btn-update{
+  width: 100%;
 }

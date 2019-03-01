@@ -3,6 +3,7 @@ import { BookService } from 'src/app/service/book/book.service';
 import { Book } from 'src/app/model/book/book.medel';
 import { User } from 'src/app/model/user/user.model';
 import { UserService } from 'src/app/service/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listyourniyay',
@@ -16,7 +17,7 @@ export class ListyourniyayComponent implements OnInit {
   dsf: Book;
 
 
-  constructor(private bookService: BookService, private userService: UserService) { }
+  constructor(private bookService: BookService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.userService.userCurrent.subscribe(user => {
@@ -25,7 +26,6 @@ export class ListyourniyayComponent implements OnInit {
     this.bookService.getBookByUser(this.user.id_user).subscribe(data => {
       this.books = data;
       data.forEach((book, i) => {
-        console.log(i);
         if (book.img_book) {
           this.books[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
         } else {
@@ -35,4 +35,7 @@ export class ListyourniyayComponent implements OnInit {
     })
   }
 
+  clickChangePage(id) {
+    this.router.navigate(['home/profile/episodelist'], { queryParams: { id: id } });
+  }
 }

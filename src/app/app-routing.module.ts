@@ -13,6 +13,8 @@ import { CreateyourniyayComponent } from './component/createyourniyay/createyour
 import { ListyourniyayComponent } from './component/listyourniyay/listyourniyay.component';
 import { EpisodelistComponent } from './component/episodelist/episodelist.component';
 import { CreateepisodeComponent } from './component/createepisode/createepisode.component';
+import { UpdateepisodeComponent } from './component/updateepisode/updateepisode.component';
+import { EpisodeComponent } from './component/episode/episode.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -36,9 +38,11 @@ const routes: Routes = [
           { path: 'createyourniyay', component: CreateyourniyayComponent },
           { path: 'listyourniyay', component: ListyourniyayComponent },
           { path: 'episodelist', component: EpisodelistComponent },
-          { path: 'createepisode', component: CreateepisodeComponent }
+          { path: 'createepisode', component: CreateepisodeComponent },
+          { path: 'updateepisode/:id', component: UpdateepisodeComponent }
         ]
-      }
+      },
+      { path: 'episode', component: EpisodeComponent }
     ]
   },
   { path: '**', component: PagenotfoundComponent }

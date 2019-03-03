@@ -1,3 +1,6 @@
+import { Typebook } from '../typebook/typebook';
+import { Episode } from '../episode/episode.model';
+
 export class Book {
 
     id_book: number;
@@ -6,5 +9,7 @@ export class Book {
     preview: string;
     id_user: number;
     img_book: string;
-
+    typebook: Array<Typebook>;
+    view: number;
+    episode: Array<Episode>;
 }

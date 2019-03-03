@@ -77,3 +77,8 @@ button {
 .btn-upload {
   width: 100%;
 }
+
+.span-exit{
+  margin-left: 4px;
+  cursor: pointer;
+}

@@ -18,7 +18,6 @@ export class EpisodelistComponent implements OnInit {
   ngOnInit() {
     // this.route.snapshot.queryParamMap.get('id')
     console.log(this.route.snapshot.queryParamMap.get('id'));
-    console.log(this.episodes);
     this.bookService.getEpisodeByID(this.route.snapshot.queryParamMap.get('id')).subscribe(episodes => {
       this.episodes = episodes;
     })

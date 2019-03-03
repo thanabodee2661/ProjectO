@@ -38,3 +38,7 @@ img {
   vertical-align: middle;
   padding: 5px;
 }
+
+.card-name-fiction {
+  overflow: auto;
+}

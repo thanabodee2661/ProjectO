@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/model/user/user.model';
 import { UserService } from 'src/app/service/user/user.service';
+import { BookService } from 'src/app/service/book/book.service';
+import { Book } from 'src/app/model/book/book.medel';
+import { Typebook } from 'src/app/model/typebook/typebook';
 
 @Component({
   selector: 'app-home',
@@ -9,44 +12,116 @@ import { UserService } from 'src/app/service/user/user.service';
 })
 export class HomeComponent implements OnInit {
 
-  cars = [];
-  cities1 = [];
+  guidebooks: Array<Book>;
+  typebooks: Array<Typebook>;
+
+  books_newfilter: Array<Book>;
+  books_viewfilter: Array<Book>;
+
+  defaultImg = "../../../assets/img/book.png";
 
   // @Input('getuser') getuser: User
 
-  constructor(private userService: UserService) {
-    this.cars = [
-      { vin: 'r3278r2', year: 2010, brand: 'Audi', color: 'Black' },
-      { vin: 'jhto2g2', year: 2015, brand: 'BMW', color: 'White' },
-      { vin: 'h453w54', year: 2012, brand: 'Honda', color: 'Blue' },
-      { vin: 'g43gwwg', year: 1998, brand: 'Renault', color: 'White' },
-      { vin: 'gf45wg5', year: 2011, brand: 'VW', color: 'Red' },
-      { vin: 'bhv5y5w', year: 2015, brand: 'Jaguar', color: 'Blue' },
-      { vin: 'ybw5fsd', year: 2012, brand: 'Ford', color: 'Yellow' },
-      { vin: '45665e5', year: 2011, brand: 'Mercedes', color: 'Brown' },
-      { vin: 'he6sb5v', year: 2015, brand: 'Ford', color: 'Black' }
-    ];
+  constructor(private userService: UserService, private bookService: BookService) {
 
-    this.cities1 = [
-      { label: 'Select City', value: null },
-      { label: 'New York', value: { id: 1, name: 'New York', code: 'NY' } },
-      { label: 'Rome', value: { id: 2, name: 'Rome', code: 'RM' } },
-      { label: 'London', value: { id: 3, name: 'London', code: 'LDN' } },
-      { label: 'Istanbul', value: { id: 4, name: 'Istanbul', code: 'IST' } },
-      { label: 'Paris', value: { id: 5, name: 'Paris', code: 'PRS' } }
-    ];
   }
 
   ngOnInit() {
     this.userService.userCurrent.subscribe(user => {
       console.log(user);
-      
     })
-
+    this.bookService.getBookByOrder(0, 5).subscribe(books => {
+      this.books_newfilter = books;
+      books.forEach((book, i) => {
+        if (book.img_book) {
+          this.books_newfilter[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
+        } else {
+          this.books_newfilter[i].img_book = "../../../assets/img/book.png";
+        }
+      })
+    })
+    this.bookService.getTypeBook().subscribe(type => {
+      this.typebooks = type
+    })
+    this.bookService.getBookByOrderView(0, 5).subscribe(books => {
+      this.books_viewfilter = books;
+      books.forEach((book, i) => {
+        if (book.img_book) {
+          this.books_viewfilter[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
+        } else {
+          this.books_viewfilter[i].img_book = "../../../assets/img/book.png";
+        }
+      })
+    })
+    this.bookService.getBookByOrderView(0, 10).subscribe(books => {
+      this.guidebooks = books;
+      books.forEach((book, i) => {
+        if (book.img_book) {
+          this.guidebooks[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
+        } else {
+          this.guidebooks[i].img_book = "../../../assets/img/book.png";
+        }
+      })
+    })
   }
 
   onClickService() {
 
+  }
+
+  onChangeType($event) {
+    console.log($event.target.value);
+    if ($event.target.value == 0) {
+      this.bookService.getBookByOrder(0, 5).subscribe(books => {
+        console.log(books);
+        this.books_newfilter = books;
+        books.forEach((book, i) => {
+          if (book.img_book) {
+            this.books_newfilter[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
+          } else {
+            this.books_newfilter[i].img_book = "../../../assets/img/book.png";
+          }
+        })
+      })
+    } else {
+      this.bookService.getBookByOrderType($event.target.value, 0, 5).subscribe(books => {
+        console.log(books)
+        this.books_newfilter = books;
+        books.forEach((book, i) => {
+          if (book.img_book) {
+            this.books_newfilter[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
+          } else {
+            this.books_newfilter[i].img_book = "../../../assets/img/book.png";
+          }
+        })
+      })
+    }
+  }
+
+  onChangeTypeView($event) {
+    if ($event.target.value == 0) {
+      this.bookService.getBookByOrderView(0, 5).subscribe(books => {
+        this.books_viewfilter = books;
+        books.forEach((book, i) => {
+          if (book.img_book) {
+            this.books_viewfilter[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
+          } else {
+            this.books_viewfilter[i].img_book = "../../../assets/img/book.png";
+          }
+        })
+      })
+    } else {
+      this.bookService.getBookByOrderViewType($event.target.value, 0, 5).subscribe(books => {
+        this.books_viewfilter = books;
+        books.forEach((book, i) => {
+          if (book.img_book) {
+            this.books_viewfilter[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
+          } else {
+            this.books_viewfilter[i].img_book = "../../../assets/img/book.png";
+          }
+        })
+      })
+    }
   }
 
 }

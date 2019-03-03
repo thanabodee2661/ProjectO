@@ -3,6 +3,7 @@ import { Book } from 'src/app/model/book/book.medel';
 import { UserService } from 'src/app/service/user/user.service';
 import { User } from 'src/app/model/user/user.model';
 import { BookService } from 'src/app/service/book/book.service';
+import { Typebook } from 'src/app/model/typebook/typebook';
 
 @Component({
   selector: 'app-createyourniyay',
@@ -16,13 +17,21 @@ export class CreateyourniyayComponent implements OnInit {
   book: Book = new Book();
   user: User = new User();
 
+  typebooks: Array<Typebook>;
+  temptypebook: Array<Typebook> = new Array<Typebook>();
+
   constructor(private userService: UserService, private bookService: BookService) { }
 
   ngOnInit() {
+    console.log(this.temptypebook);
+
     this.userService.userCurrent.subscribe(user => {
       this.user = user;
       console.log(user);
 
+    })
+    this.bookService.getTypeBook().subscribe(typebook => {
+      this.typebooks = typebook;
     })
   }
 
@@ -46,6 +55,7 @@ export class CreateyourniyayComponent implements OnInit {
     formData.append('preview', this.book.preview)
     formData.append('id_user', this.user.id_user.toString())
     formData.append('img_book', this.book.img_book)
+    formData.append('typebooks', JSON.stringify(this.temptypebook))
     formData.append('file', this.file)
 
     this.bookService.createBook(formData).subscribe(data => {
@@ -53,5 +63,22 @@ export class CreateyourniyayComponent implements OnInit {
 
     })
   }
+
+  onChangeTypeView($event) {
+    console.log($event.target.value);
+    this.temptypebook.push(this.typebooks[$event.target.value])
+    this.typebooks.splice($event.target.value, 1)
+    console.log(this.temptypebook);
+    console.log(this.typebooks);
+
+
+  }
+
+  onClickExitType(i) {
+    this.typebooks.push(this.temptypebook[i]);
+    this.temptypebook.splice(i, 1);
+
+  }
+
 
 }

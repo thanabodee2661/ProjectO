@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
 
-
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { DropdownModule } from 'primeng/dropdown';
@@ -55,7 +54,7 @@ import { EpisodeService } from './service/episode/episode.service';
     CreateepisodeComponent,
     EpisodelistComponent,
     EpisodeComponent,
-    UpdateepisodeComponent
+    UpdateepisodeComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +64,7 @@ import { EpisodeService } from './service/episode/episode.service';
     AppRoutingModule,
     CarouselModule,
     DropdownModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     RegisterService,

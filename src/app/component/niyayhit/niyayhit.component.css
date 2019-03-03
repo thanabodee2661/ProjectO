@@ -3,6 +3,9 @@
     border-style: solid;
     width: 100%;
     padding: 25px;
+    overflow: auto;
+    background-color:cornsilk;
+    margin-bottom: 20px;
 }
 
 #btn-search{
@@ -19,3 +22,24 @@ img{
     vertical-align: middle;
     padding: 5px;
 }
+
+.div-book-left{
+    width: 49%;
+    float: left;
+    margin-bottom: 5px;
+    height: 250px;
+    /* border: 2px solid; */
+}
+
+.div-book-right{
+    width: 49%;
+    float: right;
+    margin-bottom: 5px;
+    height: 250px;
+    /* border: 2px solid; */
+}
+
+.input-group-prepend .input-group-text{
+    width: 80px;
+}
+

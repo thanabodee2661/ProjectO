@@ -15,24 +15,17 @@ export class UpdateepisodeComponent implements OnInit {
   constructor(private episodeService: EpisodeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.episodeService.episodeCurrent.subscribe(episode => {
-      if (typeof (episode.id_book) == 'undefined') {
-        console.log(this.route.snapshot.paramMap.get('id'));
 
-        this.episodeService.getEpisodeByIDEpisode(this.route.snapshot.paramMap.get('id')).subscribe(episode => {
-          this.episode = episode;
-        })
-      } else {
-        this.episode = episode;
-      }
-
+    this.episodeService.getEpisodeByIDEpisode(this.route.snapshot.paramMap.get('id')).subscribe(episode => {
+      this.episode = episode;
     })
+
   }
 
-  updataEpisode(){
+  updataEpisode() {
     this.episodeService.updateEpisode(this.episode).subscribe(status => {
       console.log(status);
-      
+
     })
   }
 

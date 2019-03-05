@@ -34,6 +34,7 @@ import { EpisodelistComponent } from './component/episodelist/episodelist.compon
 import { EpisodeComponent } from './component/episode/episode.component';
 import { UpdateepisodeComponent } from './component/updateepisode/updateepisode.component';
 import { EpisodeService } from './service/episode/episode.service';
+import { ListepisodeinniyayComponent } from './component/listepisodeinniyay/listepisodeinniyay.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { EpisodeService } from './service/episode/episode.service';
     EpisodelistComponent,
     EpisodeComponent,
     UpdateepisodeComponent,
+    ListepisodeinniyayComponent,
   ],
   imports: [
     BrowserModule,

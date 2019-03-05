@@ -54,4 +54,8 @@ export class BookService {
     return <Observable<Book[]>>this.http.get('http://localhost:9999/book/view/' + type + '/' + start + '/' + end).pipe();
   }
 
+  getBookByID(id_book) {
+    return <Observable<Book[]>>this.http.get('http://localhost:9999/book/id/' + id_book).pipe();
+  }
+
 }

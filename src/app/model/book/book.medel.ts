@@ -12,4 +12,5 @@ export class Book {
     typebook: Array<Typebook>;
     view: number;
     episode: Array<Episode>;
+    count_episode: number;
 }

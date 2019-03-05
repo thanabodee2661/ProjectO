@@ -4,6 +4,7 @@ import { UserService } from 'src/app/service/user/user.service';
 import { BookService } from 'src/app/service/book/book.service';
 import { Book } from 'src/app/model/book/book.medel';
 import { Typebook } from 'src/app/model/typebook/typebook';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   // @Input('getuser') getuser: User
 
-  constructor(private userService: UserService, private bookService: BookService) {
+  constructor(private userService: UserService, private bookService: BookService, private router: Router) {
 
   }
 
@@ -65,7 +66,9 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  onClickService() {
+  onClickService(book: Book) {
+    console.log(book);
+    this.router.navigate(['home/lishepisodeinniyay'], { queryParams: { id_book: book.id_book } })
 
   }
 

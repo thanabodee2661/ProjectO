@@ -15,6 +15,7 @@ import { EpisodelistComponent } from './component/episodelist/episodelist.compon
 import { CreateepisodeComponent } from './component/createepisode/createepisode.component';
 import { UpdateepisodeComponent } from './component/updateepisode/updateepisode.component';
 import { EpisodeComponent } from './component/episode/episode.component';
+import { ListepisodeinniyayComponent } from './component/listepisodeinniyay/listepisodeinniyay.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -42,7 +43,8 @@ const routes: Routes = [
           { path: 'updateepisode/:id', component: UpdateepisodeComponent }
         ]
       },
-      { path: 'episode', component: EpisodeComponent }
+      { path: 'episode', component: EpisodeComponent },
+      { path: 'lishepisodeinniyay', component: ListepisodeinniyayComponent }
     ]
   },
   { path: '**', component: PagenotfoundComponent }

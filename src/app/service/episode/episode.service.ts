@@ -15,7 +15,7 @@ export class EpisodeService {
   constructor(private http: HttpClient) { }
 
   changeEpisode(episode: Episode) {
-    this.episodeSource.next(episode);
+    this.episodeSource.next(episode)
   }
 
   getEpisodeByIDEpisode(id_episode) {
@@ -24,5 +24,13 @@ export class EpisodeService {
 
   updateEpisode(episode: Episode) {
     return this.http.put('http://localhost:9999/episode', episode);
+  }
+
+  getEpisodeByIDOrder(id_book, start) {
+    return <Observable<Episode[]>>this.http.get('http://localhost:9999/episodes/order/' + id_book + '/' + start).pipe();
+  }
+
+  updateEpisodeView(episode: Episode) {
+    return this.http.get('http://localhost:9999/episodeview/' + episode.view + '/' + episode.id_episode);
   }
 }

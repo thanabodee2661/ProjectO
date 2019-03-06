@@ -5,5 +5,10 @@ export class Episode {
 	content: string;
 	id_book: number;
 }
-
-
+export interface comment{
+	idUserComment?:number;
+	avatar?:String;
+	collectComment?:String;
+	penname?:String;
+	idComment?:number;
+}

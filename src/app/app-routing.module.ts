@@ -16,13 +16,30 @@ import { CreateepisodeComponent } from './component/createepisode/createepisode.
 import { UpdateepisodeComponent } from './component/updateepisode/updateepisode.component';
 import { EpisodeComponent } from './component/episode/episode.component';
 import { ListepisodeinniyayComponent } from './component/listepisodeinniyay/listepisodeinniyay.component';
+import { WebboardComponent } from './component/webboard/webboard.component';
+import { WebboardallComponent } from './component/webboardall/webboardall.component';
+import { Webboardalltype2Component } from './component/webboardalltype2/webboardalltype2.component';
+import { Webboardalltype3Component } from './component/webboardalltype3/webboardalltype3.component';
+import { CreatewebboardComponent } from './component/createwebboard/createwebboard.component';
+import { DescriptionwebboardComponent } from './component/descriptionwebboard/descriptionwebboard.component';
+import { AdminwebboardComponent } from './component/adminwebboard/adminwebboard.component';
+import { AdmindescriptionwebboardComponent } from './component/admindescriptionwebboard/admindescriptionwebboard.component';
+import { SearchniyComponent } from './component/searchniy/search.component';
+import { LoginadminComponent } from './component/loginadmin/loginadmin.component';
+import { HomeadminComponent } from './component/homeadmin/homeadmin.component';
+import { RouteadminComponent } from './component/routeadmin/routeadmin.component';
+import { ManagementuserComponent } from './component/managementuser/managementuser.component';
+import { AdmincreatewebboardComponent } from './component/admincreatewebboard/admincreatewebboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'admin', component: LoginadminComponent },
   {
-    path: 'admin', component: Page2Component,
+    path: 'homeadmin', component: RouteadminComponent,
     children: [
-
+      { path: '', component: HomeadminComponent },
+      { path: 'management', component: ManagementuserComponent },
+      { path:'createwebboardadmin',component:AdmincreatewebboardComponent}
     ]
   },
   {
@@ -32,7 +49,15 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'niyayhit', component: NiyayhitComponent },
       { path: 'niyaynew', component: NiyaynewComponent },
-      { path: 'search', component: SearchComponent },
+      { path: 'webboard', component: WebboardComponent },
+      { path: 'webboardalltype1', component: WebboardallComponent },
+      { path: 'webboardalltype2', component: Webboardalltype2Component },
+      { path: 'webboardalltype3', component: Webboardalltype3Component },
+      { path: 'createwebboard', component: CreatewebboardComponent },
+      { path: 'descriptionwebboard', component: DescriptionwebboardComponent },
+      { path: 'admintypewebboard', component: AdminwebboardComponent },
+      { path: 'admindescriptionwebboard', component: AdmindescriptionwebboardComponent },
+      { path: 'search', component: SearchniyComponent },
       {
         path: 'profile', component: ProfileComponent,
         children: [

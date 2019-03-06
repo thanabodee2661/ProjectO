@@ -7,8 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { DropdownModule } from 'primeng/dropdown';
+import { TabViewModule } from 'primeng/tabview';
+import { DataViewModule } from 'primeng/dataview';
+import { PanelModule } from 'primeng/panel';
+import { DialogModule } from 'primeng/dialog';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -36,6 +40,25 @@ import { UpdateepisodeComponent } from './component/updateepisode/updateepisode.
 import { EpisodeService } from './service/episode/episode.service';
 import { ListepisodeinniyayComponent } from './component/listepisodeinniyay/listepisodeinniyay.component';
 
+import { AdmincreatewebboardComponent } from './component/admincreatewebboard/admincreatewebboard.component';
+import { AdmindescriptionwebboardComponent } from './component/admindescriptionwebboard/admindescriptionwebboard.component';
+import { AdminwebboardComponent } from './component/adminwebboard/adminwebboard.component';
+import { DescriptionwebboardComponent } from './component/descriptionwebboard/descriptionwebboard.component';
+import { HomeadminComponent } from './component/homeadmin/homeadmin.component';
+import { LoginadminComponent } from './component/loginadmin/loginadmin.component';
+import { ManagementuserComponent } from './component/managementuser/managementuser.component';
+import { NavadminComponent } from './component/navadmin/navadmin.component';
+import { RouteadminComponent } from './component/routeadmin/routeadmin.component';
+import { SearchniyComponent } from './component/searchniy/search.component';
+import { WebboardComponent } from './component/webboard/webboard.component';
+import { WebboardallComponent } from './component/webboardall/webboardall.component';
+import { Webboardalltype2Component } from './component/webboardalltype2/webboardalltype2.component';
+import { Webboardalltype3Component } from './component/webboardalltype3/webboardalltype3.component';
+import { CreatewebboardComponent } from './component/createwebboard/createwebboard.component';
+
+import { NametypePipe } from './service/search/nametype.pipe';
+
+import {  NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -57,6 +80,22 @@ import { ListepisodeinniyayComponent } from './component/listepisodeinniyay/list
     EpisodeComponent,
     UpdateepisodeComponent,
     ListepisodeinniyayComponent,
+    AdmincreatewebboardComponent,
+    AdmindescriptionwebboardComponent,
+    AdminwebboardComponent,
+    DescriptionwebboardComponent,
+    HomeadminComponent,
+    LoginadminComponent,
+    ManagementuserComponent,
+    NavadminComponent,
+    RouteadminComponent,
+    SearchniyComponent,
+    WebboardComponent,
+    WebboardallComponent,
+    Webboardalltype2Component,
+    Webboardalltype3Component,
+    CreatewebboardComponent,
+    NametypePipe
   ],
   imports: [
     BrowserModule,
@@ -67,6 +106,11 @@ import { ListepisodeinniyayComponent } from './component/listepisodeinniyay/list
     CarouselModule,
     DropdownModule,
     HttpClientModule,
+    TabViewModule,
+    DataViewModule,
+    PanelModule,
+    DialogModule,
+    NgxPaginationModule
   ],
   providers: [
     RegisterService,

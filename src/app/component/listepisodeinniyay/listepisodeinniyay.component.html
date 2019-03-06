@@ -13,8 +13,9 @@
                 <p>ประเภทหนัง : <span *ngFor="let type of book.typebook" class="badge badge-secondary" style="margin-right: 2px;">{{type.name_type}}</span></p>
                 <p>ผู้เเต่ง : {{book.panname}}</p>
               </div>
-              <div class="btn-head-niyay">
-                <button type="button" class="btn btn-success"><i class="fas fa-plus"></i> ติดตาม</button>
+              <div class="btn-head-niyay" *ngIf="user.id_user != undefined">
+                <button type="button" class="btn btn-success" *ngIf="!checkBookFavor()" (click)="addBookFavor()"><i class="fas fa-plus"></i> ติดตาม</button>
+                <button type="button" class="btn btn-success" *ngIf="checkBookFavor()" (click)="deleteFavor()">เลิกติดตาม</button>
               </div>
             </div>
           </div>

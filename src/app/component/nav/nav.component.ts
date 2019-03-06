@@ -72,7 +72,7 @@ export class NavComponent implements OnInit {
     this.status_login = false;
     this.user = new User();
     console.log(this.user);
-
+    this.sendUserNav();
 
   }
 

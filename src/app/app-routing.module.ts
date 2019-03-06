@@ -30,6 +30,7 @@ import { HomeadminComponent } from './component/homeadmin/homeadmin.component';
 import { RouteadminComponent } from './component/routeadmin/routeadmin.component';
 import { ManagementuserComponent } from './component/managementuser/managementuser.component';
 import { AdmincreatewebboardComponent } from './component/admincreatewebboard/admincreatewebboard.component';
+import { YourbookfavorComponent } from './component/yourbookfavor/yourbookfavor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -65,7 +66,9 @@ const routes: Routes = [
           { path: 'listyourniyay', component: ListyourniyayComponent },
           { path: 'episodelist', component: EpisodelistComponent },
           { path: 'createepisode', component: CreateepisodeComponent },
-          { path: 'updateepisode/:id', component: UpdateepisodeComponent }
+          { path: 'updateepisode/:id', component: UpdateepisodeComponent },
+          { path: 'yourbookfavor', component: YourbookfavorComponent },
+          { path: '', redirectTo: '/home/profile/yourbookfavor', pathMatch: 'full' }
         ]
       },
       { path: 'episode', component: EpisodeComponent },

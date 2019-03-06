@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/user/user.model';
 import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/service/register/register.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -34,9 +35,40 @@ export class RegisterComponent implements OnInit {
 
   onClickService() {
     console.log(this.user);
-    this.registerService.createUser(this.user, this.file).subscribe(data => {
-      console.log(data);
 
+    Swal.fire({
+      title: 'ยืนยันการสมัคร',
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ยืนยัน',
+      cancelButtonText: 'ยกเลิก',
+    }).then((result) => {
+      if (result.value) {
+        this.registerService.createUser(this.user, this.file).subscribe(data => {
+          console.log(data);
+          if (data > 0) {
+            Swal.fire({
+              type: 'success',
+              title: 'สมัครสมาชิกสำเร็จ',
+              toast: true,
+              timer: 1500,
+              position: 'top-end',
+              showConfirmButton: false,
+            })
+          } else {
+            Swal.fire({
+              type: 'error',
+              title: 'สมัครสมาชิกไม่สำเร็จ',
+              toast: true,
+              timer: 1500,
+              position: 'top-end',
+              showConfirmButton: false,
+            })
+          }
+        })
+      }
     })
   }
 }

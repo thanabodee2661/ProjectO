@@ -24,6 +24,6 @@ export class RegisterService {
     form_data.append('panname', user.panname);
     form_data.append('password', user.password);
 
-    return this.http.post<User>(this.customersUrl, form_data);
+    return this.http.post(this.customersUrl, form_data);
   }
 }

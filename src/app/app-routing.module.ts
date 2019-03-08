@@ -30,16 +30,18 @@ import { HomeadminComponent } from './component/homeadmin/homeadmin.component';
 import { RouteadminComponent } from './component/routeadmin/routeadmin.component';
 import { ManagementuserComponent } from './component/managementuser/managementuser.component';
 import { AdmincreatewebboardComponent } from './component/admincreatewebboard/admincreatewebboard.component';
+import { ChangepasswordComponent } from './component/changepassword/changepassword.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'admin', component: LoginadminComponent },
+  { path: 'changepassword', component: ChangepasswordComponent },
   {
     path: 'homeadmin', component: RouteadminComponent,
     children: [
       { path: '', component: HomeadminComponent },
       { path: 'management', component: ManagementuserComponent },
-      { path:'createwebboardadmin',component:AdmincreatewebboardComponent}
+      { path: 'createwebboardadmin', component: AdmincreatewebboardComponent }
     ]
   },
   {

@@ -16,8 +16,8 @@ export class ManagementuserComponent implements OnInit {
   displayDialog: boolean;
   userReport: commentreport[] = [];
   cwebboard: checkwebboard[] = [];
-  admin:adminWebboard2[]=[];
-  constructor(private http: HttpClient, private usercomment: CommentreportService,private webservice:WebboardService) { }
+  admin: adminWebboard2[] = [];
+  constructor(private http: HttpClient, private usercomment: CommentreportService, private webservice: WebboardService) { }
 
   ngOnInit() {
     this.commentReport();
@@ -25,9 +25,9 @@ export class ManagementuserComponent implements OnInit {
     this.adminwebboard();
   }
 
-  adminwebboard(){
-    this.webservice.foradminsearchdelete(result=>{
-      this.admin=result;
+  adminwebboard() {
+    this.webservice.foradminsearchdelete(result => {
+      this.admin = result;
     })
   }
 
@@ -58,13 +58,13 @@ export class ManagementuserComponent implements OnInit {
           'Success',
           '',
           'success'
-        ).then((result)=>{
+        ).then((result) => {
           this.usercomment.CanCelBan(v1, result => {
-
+            this.commentReport();
           })
-          setTimeout(() => {
-            location.reload();
-          }, 800);
+          // setTimeout(() => {
+          //   location.reload();
+          // }, 800);
         })
       } else if (
         // Read more about handling dismissals
@@ -99,13 +99,13 @@ export class ManagementuserComponent implements OnInit {
           'Success',
           'ทำการแบนสำเร็จ',
           'success'
-        ).then((result)=>{
+        ).then((result) => {
           this.usercomment.Banuser(v1, v2, result => {
-
+            this.commentReport();
           })
-          setTimeout(() => {
-            location.reload();
-          }, 800);
+          // setTimeout(() => {
+          //   location.reload();
+          // }, 800);
         })
       } else if (
         // Read more about handling dismissals
@@ -120,13 +120,13 @@ export class ManagementuserComponent implements OnInit {
     })
   }
 
-  Checkwebboardreport(){
-    this.webservice.Checkwebboardreport(result=>{
+  Checkwebboardreport() {
+    this.webservice.Checkwebboardreport(result => {
       this.cwebboard = result;
     })
   }
 
-  confirm3(num){
+  confirm3(num) {
     const swalWithBootstrapButtons = Swal.mixin({
       cancelButtonClass: 'btn btn-danger',
       confirmButtonClass: 'btn btn-success',
@@ -142,17 +142,18 @@ export class ManagementuserComponent implements OnInit {
       confirmButtonText: 'Yes, Success!'
     }).then((result) => {
       if (result.value) {
-        
+
         swalWithBootstrapButtons.fire(
           'Success',
           '',
           'success'
-        ).then((result)=>{
+        ).then((result) => {
           this.webservice.Webboardcancelban(num, result => {
+            this.Checkwebboardreport();
           })
-          setTimeout(() => {
-            location.reload();
-          }, 800);
+          // setTimeout(() => {
+          //   location.reload();
+          // }, 800);
         })
       } else if (
         // Read more about handling dismissals
@@ -167,7 +168,7 @@ export class ManagementuserComponent implements OnInit {
     })
   }
 
-  confirm4(num){
+  confirm4(num) {
     const swalWithBootstrapButtons = Swal.mixin({
       cancelButtonClass: 'btn btn-danger',
       confirmButtonClass: 'btn btn-success',
@@ -187,13 +188,13 @@ export class ManagementuserComponent implements OnInit {
           'Success',
           'ทำการแบนสำเร็จ',
           'success'
-        ).then((result)=>{
+        ).then((result) => {
           this.webservice.Webboardbanuser(num, result => {
-
+            this.Checkwebboardreport();
           })
-          setTimeout(() => {
-            location.reload();
-          }, 800);
+          // setTimeout(() => {
+          //   location.reload();
+          // }, 800);
         })
       } else if (
         // Read more about handling dismissals
@@ -208,7 +209,7 @@ export class ManagementuserComponent implements OnInit {
     })
   }
 
-  confirm5(v1){
+  confirm5(v1) {
     console.log(v1);
     const swalWithBootstrapButtons = Swal.mixin({
       cancelButtonClass: 'btn btn-danger',
@@ -229,13 +230,13 @@ export class ManagementuserComponent implements OnInit {
           'Success',
           'ทำการลบสำเร็จ',
           'success'
-        ).then((result)=>{
+        ).then((result) => {
           this.webservice.admindeletewebboard(v1, result => {
-
+            this.adminwebboard();
           })
-          setTimeout(() => {
-            location.reload();
-          }, 800);
+          // setTimeout(() => {
+          //   location.reload();
+          // }, 800);
         })
       } else if (
         // Read more about handling dismissals

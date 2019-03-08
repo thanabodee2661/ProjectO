@@ -59,6 +59,7 @@ import { CreatewebboardComponent } from './component/createwebboard/createwebboa
 import { NametypePipe } from './service/search/nametype.pipe';
 
 import {  NgxPaginationModule } from 'ngx-pagination';
+import { ChangepasswordComponent } from './component/changepassword/changepassword.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import {  NgxPaginationModule } from 'ngx-pagination';
     Webboardalltype2Component,
     Webboardalltype3Component,
     CreatewebboardComponent,
-    NametypePipe
+    NametypePipe,
+    ChangepasswordComponent
   ],
   imports: [
     BrowserModule,

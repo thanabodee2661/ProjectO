@@ -4,7 +4,8 @@ import { Router } from '@angular/router'
 import { LoginService } from 'src/app/service/login/login.service';
 import { User } from 'src/app/model/user/user.model';
 import { JwtService } from 'src/app/service/jwt/jwt.service';
-
+import { EmailService } from '../../service/email/email.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nav',
@@ -20,7 +21,7 @@ export class NavComponent implements OnInit {
 
   @Output() getuser = new EventEmitter<User>();
 
-  constructor(private modalService: NgbModal, private router: Router, private loginService: LoginService, private jwt: JwtService) { }
+  constructor(private modalService: NgbModal, private router: Router, private loginService: LoginService, private jwt: JwtService, private emailservice: EmailService) { }
 
   open(content) {
     console.log(content);
@@ -101,5 +102,25 @@ export class NavComponent implements OnInit {
 
   sendUserNav() {
     this.getuser.emit(this.user);
+  }
+
+  forgotpass() {
+    if (this.user.email == undefined) {
+      Swal.fire(
+        'กรุณากรอกอีเมลล์ของท่าน',
+        '',
+        'warning'
+      )
+    } else {
+      this.emailservice.forgetpassword(this.user.email, result => {
+        Swal.fire(
+          'ส่ง อีเมลล์ สำเร็จ',
+          'กรุณาเช็คที่อีเมลล์ของท่านเพื่อเปลี่ยนรหัสผ่าน',
+          'success'
+        ).then(result => {
+          this.modalService.dismissAll();
+        })
+      })
+    }
   }
 }

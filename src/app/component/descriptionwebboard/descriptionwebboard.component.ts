@@ -78,10 +78,10 @@ export class DescriptionwebboardComponent implements OnInit {
         'สร้าง comment สำเร็จ',
         '',
         'success'
-      )
-      setTimeout(() => {
-        location.reload();
-      }, 800);
+      ).then(result=>{
+        this.GetComment(this.id);
+      })
+      
     })
   }
 
@@ -118,10 +118,8 @@ export class DescriptionwebboardComponent implements OnInit {
           'success'
         ).then((result) => {
           this.webservice.usermodifywebboard(v3, head, collect, result => {
+            this.GetTopic(this.id);
           })
-          setTimeout(() => {
-            location.reload();
-          }, 800);
         })
       } else if (
         // Read more about handling dismissals
@@ -158,10 +156,8 @@ export class DescriptionwebboardComponent implements OnInit {
           'success'
         ).then((result) => {
           this.webservice.admindeletewebboard(v1, result => {
-          })
-          setTimeout(() => {
             this.router.navigate(['/home/webboard']);
-          }, 800);
+          })
         })
       } else if (
         // Read more about handling dismissals
@@ -198,10 +194,9 @@ export class DescriptionwebboardComponent implements OnInit {
           'success'
         ).then((result) => {
           this.webservice.usermodifycomment(v1, v2, result => {
+            this.GetComment(this.id);
           })
-          setTimeout(() => {
-            location.reload();
-          }, 800);
+         
         })
       } else if (
         // Read more about handling dismissals
@@ -239,10 +234,8 @@ export class DescriptionwebboardComponent implements OnInit {
           'success'
         ).then((result) => {
           this.webservice.userdeletecomment(v1, result => {
+            this.GetComment(this.id);
           })
-          setTimeout(() => {
-            location.reload();
-          }, 800);
         })
       } else if (
         // Read more about handling dismissals

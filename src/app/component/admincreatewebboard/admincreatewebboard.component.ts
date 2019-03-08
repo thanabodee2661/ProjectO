@@ -55,11 +55,11 @@ export class AdmincreatewebboardComponent implements OnInit {
           'success'
         ).then((result)=>{
           this.webservice.adminmodifywebboard(v1,v2,v3, result => {
-
+            this.Getwebboardadmin();
           })
-          setTimeout(() => {
-            location.reload();
-          }, 800);
+          // setTimeout(() => {
+          //   location.reload();
+          // }, 800);
         })
       } else if (
         // Read more about handling dismissals

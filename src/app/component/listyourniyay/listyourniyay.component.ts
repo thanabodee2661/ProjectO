@@ -20,16 +20,19 @@ export class ListyourniyayComponent implements OnInit {
   ngOnInit() {
     this.userService.userCurrent.subscribe(user => {
       this.user = user;
-      this.bookService.getBookByUser(this.user.id_user).subscribe(data => {
-        this.books = data;
-        data.forEach((book, i) => {
-          if (book.img_book) {
-            this.books[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
-          } else {
-            this.books[i].img_book = "../../../assets/img/book.png";
-          }
+      if (user.id_user != null) {
+        this.bookService.getBookByUser(this.user.id_user).subscribe(data => {
+          this.books = data;
+          data.forEach((book, i) => {
+            if (book.img_book) {
+              this.books[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
+            } else {
+              this.books[i].img_book = "../../../assets/img/book.png";
+            }
+          })
         })
-      })
+
+      }
     })
   }
 

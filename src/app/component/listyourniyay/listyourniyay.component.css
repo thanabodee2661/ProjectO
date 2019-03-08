@@ -20,13 +20,8 @@
 
 .card-img {
   width: 120px;
-  height: 150px;
   margin-right: 10px;
   cursor: pointer;
-}
-
-.card-img:hover {
-  background: rgba(0, 0, 0, .3);
 }
 
 .card-img img {
@@ -42,4 +37,9 @@ img {
 
 .card-name-fiction {
   overflow: auto;
+}
+
+.btn-delete{
+  width: 120px;
+  border-radius: 0;
 }

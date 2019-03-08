@@ -6,6 +6,8 @@ import { User } from 'src/app/model/user/user.model';
 import { JwtService } from 'src/app/service/jwt/jwt.service';
 import { EmailService } from '../../service/email/email.service';
 import Swal from 'sweetalert2';
+import { DepFlags } from '@angular/compiler/src/core';
+import { splitDepsDsl } from '@angular/core/src/view/util';
 
 @Component({
   selector: 'app-nav',
@@ -25,14 +27,13 @@ export class NavComponent implements OnInit {
 
   open(content) {
     console.log(content);
-    
+
     this.modalService.open(content);
   }
 
   changePageRegister() {
 
     console.log(this.router.url);
-
 
     this.router.navigateByUrl('/home/register');
     this.modalService.dismissAll()
@@ -67,7 +68,6 @@ export class NavComponent implements OnInit {
           }
           this.modalService.dismissAll();
         });
-        // this.modalService.dismissAll();
 
       } else {
         this.status_login = dataAuth;
@@ -75,25 +75,14 @@ export class NavComponent implements OnInit {
     });
   }
 
-  logout(content) {
-
-    console.log(content);
-    console.log(this.router.url);
+  logout() {
 
     this.loginService.logout();
     this.status_login = false;
     this.user = new User();
     console.log(this.user);
     this.sendUserNav();
-
-    let url = this.router.url.split('/')
-    console.log(url);
-
-    url.forEach(path => {
-      if (path == 'profile') {
-        this.open(content);
-      }
-    })
+    this.checkLogout();
   }
 
   onClickChangePage(path: string) {
@@ -122,5 +111,17 @@ export class NavComponent implements OnInit {
         })
       })
     }
+  }
+
+  checkLogout() {
+    let url = this.router.url.split('/');
+    let checkURL = url.find(this.findPath)
+    if(checkURL != null){
+      this.router.navigateByUrl('/home/page404')
+    }
+  }
+
+  findPath(path) {
+    return path == 'profile';
   }
 }

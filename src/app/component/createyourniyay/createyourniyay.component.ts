@@ -51,48 +51,55 @@ export class CreateyourniyayComponent implements OnInit {
   createBook() {
     // console.log(this.book);
 
-    Swal.fire({
-      title: 'ยืนยันการสมัคร',
-      type: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'ยืนยัน',
-      cancelButtonText: 'ยกเลิก',
-    }).then((result) => {
-      if (result.value) {
-        const formData = new FormData();
-        formData.append('name_fiction', this.book.name_fiction);
-        formData.append('preview', this.book.preview)
-        formData.append('id_user', this.user.id_user.toString())
-        formData.append('img_book', this.book.img_book)
-        formData.append('typebooks', JSON.stringify(this.temptypebook))
-        formData.append('file', this.file)
+    if (this.book.name_fiction == null || this.temptypebook.length == 0 || this.book.preview == null) {
+      Swal.fire({
+        title: 'กรุณากรอกข้อมูลให้ครบทุกช่อง',
+        type: 'warning'
+      })
+    } else {
+      Swal.fire({
+        title: 'ยืนยันการสร้าง',
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ยืนยัน',
+        cancelButtonText: 'ยกเลิก',
+      }).then((result) => {
+        if (result.value) {
+          const formData = new FormData();
+          formData.append('name_fiction', this.book.name_fiction);
+          formData.append('preview', this.book.preview)
+          formData.append('id_user', this.user.id_user.toString())
+          formData.append('img_book', this.book.img_book)
+          formData.append('typebooks', JSON.stringify(this.temptypebook))
+          formData.append('file', this.file)
 
-        this.bookService.createBook(formData).subscribe(data => {
-          console.log(data);
-          if (data > 0) {
-            Swal.fire({
-              type: 'success',
-              title: 'สร้างสำเร็จ',
-              toast: true,
-              timer: 1500,
-              position: 'top-end',
-              showConfirmButton: false,
-            })
-          } else {
-            Swal.fire({
-              type: 'error',
-              title: 'สร้างไม่สำเร็จ',
-              toast: true,
-              timer: 1500,
-              position: 'top-end',
-              showConfirmButton: false,
-            })
-          }
-        })
-      }
-    })
+          this.bookService.createBook(formData).subscribe(data => {
+            console.log(data);
+            if (data > 0) {
+              Swal.fire({
+                type: 'success',
+                title: 'สร้างสำเร็จ',
+                toast: true,
+                timer: 1500,
+                position: 'top-end',
+                showConfirmButton: false,
+              })
+            } else {
+              Swal.fire({
+                type: 'error',
+                title: 'สร้างไม่สำเร็จ',
+                toast: true,
+                timer: 1500,
+                position: 'top-end',
+                showConfirmButton: false,
+              })
+            }
+          })
+        }
+      })
+    }
   }
 
   onChangeTypeView($event) {

@@ -20,43 +20,50 @@ export class CreateepisodeComponent implements OnInit {
   }
 
   createEpisode() {
-    console.log(this.episode);
+    console.log(this.episode.name_episode);
 
+    if (this.episode.content == null || this.episode.name_episode == null) {
+      Swal.fire({
+        title: 'กรุณากรอกข้อมูลให้ครบทุกช่อง',
+        type: 'warning'
+      })
+    } else {
+      Swal.fire({
+        title: 'ยืนยันการสมัคร',
+        type: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ยืนยัน',
+        cancelButtonText: 'ยกเลิก',
+      }).then((result) => {
+        if (result.value) {
+          this.bookService.createEpisode(this.episode).subscribe(data => {
+            console.log(data);
+            if (data > 0) {
+              Swal.fire({
+                type: 'success',
+                title: 'สมัครสมาชิกสำเร็จ',
+                toast: true,
+                timer: 1500,
+                position: 'top-end',
+                showConfirmButton: false,
+              })
+            } else {
+              Swal.fire({
+                type: 'error',
+                title: 'สมัครสมาชิกไม่สำเร็จ',
+                toast: true,
+                timer: 1500,
+                position: 'top-end',
+                showConfirmButton: false,
+              })
+            }
+          })
+        }
+      })
+    }
 
-    Swal.fire({
-      title: 'ยืนยันการสมัคร',
-      type: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'ยืนยัน',
-      cancelButtonText: 'ยกเลิก',
-    }).then((result) => {
-      if (result.value) {
-        this.bookService.createEpisode(this.episode).subscribe(data => {
-          console.log(data);
-          if (data > 0) {
-            Swal.fire({
-              type: 'success',
-              title: 'สมัครสมาชิกสำเร็จ',
-              toast: true,
-              timer: 1500,
-              position: 'top-end',
-              showConfirmButton: false,
-            })
-          } else {
-            Swal.fire({
-              type: 'error',
-              title: 'สมัครสมาชิกไม่สำเร็จ',
-              toast: true,
-              timer: 1500,
-              position: 'top-end',
-              showConfirmButton: false,
-            })
-          }
-        })
-      }
-    })
   }
 
 }

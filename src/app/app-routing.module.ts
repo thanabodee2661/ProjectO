@@ -71,11 +71,13 @@ const routes: Routes = [
           { path: 'createepisode', component: CreateepisodeComponent },
           { path: 'updateepisode/:id', component: UpdateepisodeComponent },
           { path: '', redirectTo: '/home/profile/yourbookfavor', pathMatch: 'full' },
-          { path: 'yourbookfavor', component: YourbookfavorComponent }
+          { path: 'yourbookfavor', component: YourbookfavorComponent },
         ]
       },
       { path: 'episode', component: EpisodeComponent },
-      { path: 'lishepisodeinniyay', component: ListepisodeinniyayComponent }
+      { path: 'lishepisodeinniyay', component: ListepisodeinniyayComponent },
+      { path: 'page404', component: PagenotfoundComponent },
+      { path: '**', component: PagenotfoundComponent }
     ]
   },
   { path: '**', component: PagenotfoundComponent }

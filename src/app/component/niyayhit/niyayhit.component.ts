@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/model/book/book.medel';
 import { BookService } from 'src/app/service/book/book.service';
 import { Typebook } from 'src/app/model/typebook/typebook';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-niyayhit',
@@ -14,9 +15,10 @@ export class NiyayhitComponent implements OnInit {
   Books_hit_filter: Array<Book>
   typebooks: Array<Typebook>
 
-  searchtxt: string;
+  searchtxt: string = '';
+  searchtype: number = 0;
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit() {
     this.bookService.getBookByOrderView(0, 100).subscribe(books => {
@@ -41,23 +43,29 @@ export class NiyayhitComponent implements OnInit {
     })
   }
 
-  onChangeTypeView($event) {
-    console.log($event.target.value);
-    this.books_hit = this.Books_hit_filter.filter(book => {
+  searchBook() {
+
+    let booksSearch = this.Books_hit_filter.filter(book => {
       let isMacth = false;
       book.typebook.forEach(typebook => {
-        if (typebook.id_type == $event.target.value || $event.target.value == 0) isMacth = true;
+        if (typebook.id_type == this.searchtype || this.searchtype == 0) isMacth = true;
       })
       return isMacth;
     })
+
+    if(this.searchtxt.length > 0){
+      this.books_hit = booksSearch.filter(book => {
+        return book.name_fiction.includes(this.searchtxt)
+      })
+    }else{
+      this.books_hit = booksSearch;
+    }
   }
 
-  onKeyUpSearch() {
-    console.log(this.searchtxt);
-    
-    this.books_hit = this.Books_hit_filter.filter(book => {
-      return book.name_fiction.includes(this.searchtxt)
-    })
+  onClickService(book: Book) {
+    console.log(book);
+    this.router.navigate(['home/lishepisodeinniyay'], { queryParams: { id_book: book.id_book } })
+
   }
 
 }

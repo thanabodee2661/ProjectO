@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user/user.model';
 import { UserService } from 'src/app/service/user/user.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,7 @@ export class ProfileComponent implements OnInit {
   user: User = new User();
   imgProfile: string;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.userService.userCurrent.subscribe(user => {
@@ -25,6 +26,10 @@ export class ProfileComponent implements OnInit {
 
   onClickChangePage(page: string) {
     this.router.navigateByUrl('home/profile/' + page);
+  }
+
+  open(content) {
+    this.modalService.open(content);
   }
 
 }

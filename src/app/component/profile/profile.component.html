@@ -28,3 +28,42 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Login</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="nav-div-login">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="material-icons">
+              email
+            </i></span>
+        </div>
+        <input type="email" class="form-control" placeholder="Email" aria-label="Email" [(ngModel)]="user.email">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="material-icons">
+              https
+            </i></span>
+        </div>
+        <input type="password" class="form-control" placeholder="Password" aria-label="Password" [(ngModel)]="user.password">
+      </div>
+      <div class="nav-div-login-btn">
+        <button type="button" class="btn btn-primary" (click)="login();">Login</button>
+      </div>
+      <div class="nav-div-reg-btn">
+        <button type="button" class="btn btn-success" (click)="changePageRegister();">Register</button>
+      </div>
+      <div class="nav-div-forg-btn">
+        <button type="button" class="btn btn-warning">forgot password</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

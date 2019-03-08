@@ -32,6 +32,7 @@
     width: 120px;
     height: 150px;
     border: 1px solid;
+    cursor: pointer;
 }
 
 img{
@@ -41,4 +42,15 @@ img{
 
 .input-group-prepend .input-group-text{
     width: 80px;
+}
+
+.my-pagination /deep/ .ngx-pagination .current{
+    background-color:aqua;
+    color:red;
+}
+.my-pagination /deep/ .ngx-pagination {
+    background-color:dimgray;
+    color:red;
+    margin-bottom: 0;
+    
 }

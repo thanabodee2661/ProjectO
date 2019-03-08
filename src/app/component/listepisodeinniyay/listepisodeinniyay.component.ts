@@ -84,7 +84,7 @@ export class ListepisodeinniyayComponent implements OnInit {
 
         this.user.favor.push(bookTemp);
         console.log(this.user);
-        
+
       }
     })
   }
@@ -94,8 +94,20 @@ export class ListepisodeinniyayComponent implements OnInit {
       if (result > 0) {
         this.user.favor.splice(this.indexBookFavor, 1)
         console.log(this.user);
-        
+
       }
+    })
+  }
+
+  checkUserLogin() {
+    this.userService.userCurrent.subscribe(user => {
+      this.user = user;
+      if (typeof (user.id_user) != 'undefined') {
+        return true;
+      } else {
+        return false;
+      }
+
     })
   }
 

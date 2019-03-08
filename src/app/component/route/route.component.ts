@@ -18,12 +18,16 @@ export class RouteComponent implements OnInit {
   }
 
   getUser(user) {
-    this.userService.getFavorBook(user.id_user).subscribe(book_favor => {
-      user.favor = book_favor;
-      console.log(user);
-      
+    if (typeof (user.id_user) != 'undefined') {
+      this.userService.getFavorBook(user.id_user).subscribe(book_favor => {
+        user.favor = book_favor;
+        console.log(user);
+
+        this.userService.changeUser(user);
+      })
+    } else {
       this.userService.changeUser(user);
-    })
+    }
   }
 
 }

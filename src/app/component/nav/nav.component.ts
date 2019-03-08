@@ -17,15 +17,22 @@ export class NavComponent implements OnInit {
   user: User = new User();
   status_login: boolean = false;
 
+
   @Output() getuser = new EventEmitter<User>();
 
   constructor(private modalService: NgbModal, private router: Router, private loginService: LoginService, private jwt: JwtService) { }
 
   open(content) {
+    console.log(content);
+    
     this.modalService.open(content);
   }
 
   changePageRegister() {
+
+    console.log(this.router.url);
+
+
     this.router.navigateByUrl('/home/register');
     this.modalService.dismissAll()
   }
@@ -67,13 +74,25 @@ export class NavComponent implements OnInit {
     });
   }
 
-  logout() {
+  logout(content) {
+
+    console.log(content);
+    console.log(this.router.url);
+
     this.loginService.logout();
     this.status_login = false;
     this.user = new User();
     console.log(this.user);
     this.sendUserNav();
 
+    let url = this.router.url.split('/')
+    console.log(url);
+
+    url.forEach(path => {
+      if (path == 'profile') {
+        this.open(content);
+      }
+    })
   }
 
   onClickChangePage(path: string) {

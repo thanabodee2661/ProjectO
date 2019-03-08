@@ -59,11 +59,8 @@ import { CreatewebboardComponent } from './component/createwebboard/createwebboa
 import { NametypePipe } from './service/search/nametype.pipe';
 
 import {  NgxPaginationModule } from 'ngx-pagination';
-<<<<<<< HEAD
 import { ChangepasswordComponent } from './component/changepassword/changepassword.component';
-=======
-import { YourbookfavorComponent } from './component/yourbookfavor/yourbookfavor.component';
->>>>>>> master
+
 
 @NgModule({
   declarations: [
@@ -101,11 +98,7 @@ import { YourbookfavorComponent } from './component/yourbookfavor/yourbookfavor.
     Webboardalltype3Component,
     CreatewebboardComponent,
     NametypePipe,
-<<<<<<< HEAD
     ChangepasswordComponent
-=======
-    YourbookfavorComponent
->>>>>>> master
   ],
   imports: [
     BrowserModule,

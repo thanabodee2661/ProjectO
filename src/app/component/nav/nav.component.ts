@@ -20,7 +20,7 @@ export class NavComponent implements OnInit {
 
   @Output() getuser = new EventEmitter<User>();
 
-  constructor(private modalService: NgbModal, private router: Router, private loginService: LoginService, private jwt: JwtService,private emailservice:EmailService) { }
+  constructor(private modalService: NgbModal, private router: Router, private loginService: LoginService, private jwt: JwtService, private emailservice: EmailService) { }
 
   open(content) {
     this.modalService.open(content);
@@ -85,16 +85,23 @@ export class NavComponent implements OnInit {
     this.getuser.emit(this.user);
   }
 
-  forgotpass(){
-   
-   this.emailservice.forgetpassword(this.user.email,result=>{
-    Swal.fire(
-      'ส่ง อีเมลล์ สำเร็จ',
-      'กรุณาเช็คที่อีเมลล์ของท่านเพื่อเปลี่ยนรหัสผ่าน',
-      'success'
-    ).then(result=>{
-      this.modalService.dismissAll();
-    })
-   })
+  forgotpass() {
+    if (this.user.email == undefined) {
+      Swal.fire(
+        'กรุณากรอกอีเมลล์ของท่าน',
+        '',
+        'warning'
+      )
+    } else {
+      this.emailservice.forgetpassword(this.user.email, result => {
+        Swal.fire(
+          'ส่ง อีเมลล์ สำเร็จ',
+          'กรุณาเช็คที่อีเมลล์ของท่านเพื่อเปลี่ยนรหัสผ่าน',
+          'success'
+        ).then(result => {
+          this.modalService.dismissAll();
+        })
+      })
+    }
   }
 }

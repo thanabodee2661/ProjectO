@@ -31,6 +31,7 @@ import { RouteadminComponent } from './component/routeadmin/routeadmin.component
 import { ManagementuserComponent } from './component/managementuser/managementuser.component';
 import { AdmincreatewebboardComponent } from './component/admincreatewebboard/admincreatewebboard.component';
 import { ChangepasswordComponent } from './component/changepassword/changepassword.component';
+import { YourbookfavorComponent } from './component/yourbookfavor/yourbookfavor.component';
 
 
 const routes: Routes = [
@@ -69,7 +70,8 @@ const routes: Routes = [
           { path: 'episodelist', component: EpisodelistComponent },
           { path: 'createepisode', component: CreateepisodeComponent },
           { path: 'updateepisode/:id', component: UpdateepisodeComponent },
-          { path: '', redirectTo: '/home/profile/yourbookfavor', pathMatch: 'full' }
+          { path: '', redirectTo: '/home/profile/yourbookfavor', pathMatch: 'full' },
+          { path: 'yourbookfavor', component: YourbookfavorComponent }
         ]
       },
       { path: 'episode', component: EpisodeComponent },

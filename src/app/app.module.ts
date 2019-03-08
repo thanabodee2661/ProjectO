@@ -55,6 +55,7 @@ import { WebboardallComponent } from './component/webboardall/webboardall.compon
 import { Webboardalltype2Component } from './component/webboardalltype2/webboardalltype2.component';
 import { Webboardalltype3Component } from './component/webboardalltype3/webboardalltype3.component';
 import { CreatewebboardComponent } from './component/createwebboard/createwebboard.component';
+import { YourbookfavorComponent } from './component/yourbookfavor/yourbookfavor.component';
 
 import { NametypePipe } from './service/search/nametype.pipe';
 
@@ -98,7 +99,8 @@ import { ChangepasswordComponent } from './component/changepassword/changepasswo
     Webboardalltype3Component,
     CreatewebboardComponent,
     NametypePipe,
-    ChangepasswordComponent
+    ChangepasswordComponent,
+    YourbookfavorComponent
   ],
   imports: [
     BrowserModule,

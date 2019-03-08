@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/model/user/user.model';
 import { UserService } from 'src/app/service/user/user.service';
 
 @Component({
@@ -19,7 +18,12 @@ export class RouteComponent implements OnInit {
   }
 
   getUser(user) {
-    this.userService.changeUser(user);
+    this.userService.getFavorBook(user.id_user).subscribe(book_favor => {
+      user.favor = book_favor;
+      console.log(user);
+      
+      this.userService.changeUser(user);
+    })
   }
 
 }

@@ -13,6 +13,7 @@ export class User {
     public application_date: Date;
     public status: number;
     public favor: Array<Book>;
+    public books: Array<Book>;
 
     constructor() {
 

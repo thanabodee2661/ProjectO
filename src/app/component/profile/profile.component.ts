@@ -20,16 +20,17 @@ export class ProfileComponent implements OnInit {
     this.userService.userCurrent.subscribe(user => {
       console.log(user);
       this.user = user;
-      this.imgProfile = "http://localhost:9999/img/" + user.id_user + "/" + user.avatar
+      if(user.avatar != null){
+        this.imgProfile = "http://localhost:9999/img/" + user.id_user + "/" + user.avatar;
+      }else{
+        this.imgProfile = "../../../assets/img/person.png";
+      }
+      
     })
   }
 
   onClickChangePage(page: string) {
     this.router.navigateByUrl('home/profile/' + page);
-  }
-
-  open(content) {
-    this.modalService.open(content);
   }
 
 }

@@ -3,6 +3,7 @@ import { BehaviorSubject, Subject, Observable } from 'rxjs';
 import { User } from 'src/app/model/user/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Book } from 'src/app/model/book/book.medel';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -30,6 +31,19 @@ export class UserService {
 
   getFavorBook(id_user) {
     return <Observable<Book[]>>this.http.get('http://localhost:9999/userfavorbook/' + id_user)
+  }
+
+  updateUser(user: User, file: File){
+    const form_data: FormData = new FormData();
+    form_data.append('file', file);
+    form_data.append('name', user.name);
+    form_data.append('lastname', user.lastname);
+    form_data.append('birthday', user.birthday.toString());
+    form_data.append('avatar', user.avatar);
+    form_data.append('panname', user.panname);
+    form_data.append('id_user', user.id_user.toString());
+
+    return  this.http.put('http://localhost:9999/user', form_data)
   }
 
 }

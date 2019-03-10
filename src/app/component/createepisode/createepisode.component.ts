@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Episode } from 'src/app/model/episode/episode.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from 'src/app/service/book/book.service';
 import Swal from 'sweetalert2';
+import { UserService } from 'src/app/service/user/user.service';
+import { User } from 'src/app/model/user/user.model';
 
 @Component({
   selector: 'app-createepisode',
@@ -12,11 +14,18 @@ import Swal from 'sweetalert2';
 export class CreateepisodeComponent implements OnInit {
 
   episode: Episode = new Episode();
+  user: User;
 
-  constructor(private route: ActivatedRoute, private bookService: BookService) { }
+  constructor(private route: ActivatedRoute, private bookService: BookService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.episode.id_book = Number(this.route.snapshot.queryParamMap.get('id'));
+    this.userService.userCurrent.subscribe(user => {
+      this.user = user;
+      if (user.books == null) {
+        this.router.navigateByUrl('/home/profile/listyourniyay')
+      }
+    })
   }
 
   createEpisode() {

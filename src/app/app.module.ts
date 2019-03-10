@@ -61,6 +61,7 @@ import { NametypePipe } from './service/search/nametype.pipe';
 
 import {  NgxPaginationModule } from 'ngx-pagination';
 import { ChangepasswordComponent } from './component/changepassword/changepassword.component';
+import { UpdateprofileComponent } from './component/updateprofile/updateprofile.component';
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import { ChangepasswordComponent } from './component/changepassword/changepasswo
     CreatewebboardComponent,
     NametypePipe,
     ChangepasswordComponent,
-    YourbookfavorComponent
+    YourbookfavorComponent,
+    UpdateprofileComponent
   ],
   imports: [
     BrowserModule,

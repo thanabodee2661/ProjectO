@@ -30,8 +30,8 @@ export class BookService {
     return this.http.post('http://localhost:9999/episode', episode);
   }
 
-  getEpisodeByID(id_book) {
-    return <Observable<Episode[]>>this.http.get('http://localhost:9999/episodes/' + id_book).pipe();
+  getEpisodeByID(id_book, id_user) {
+    return <Observable<Episode[]>>this.http.get('http://localhost:9999/episodes/' + id_book + '/' + id_user).pipe();
   }
 
   getTypeBook() {
@@ -56,6 +56,10 @@ export class BookService {
 
   getBookByID(id_book) {
     return <Observable<Book[]>>this.http.get('http://localhost:9999/book/id/' + id_book).pipe();
+  }
+
+  deleteBookByID(id_book){
+    return this.http.delete('http://localhost:9999/book/' + id_book);
   }
 
 }

@@ -32,6 +32,7 @@ import { ManagementuserComponent } from './component/managementuser/managementus
 import { AdmincreatewebboardComponent } from './component/admincreatewebboard/admincreatewebboard.component';
 import { ChangepasswordComponent } from './component/changepassword/changepassword.component';
 import { YourbookfavorComponent } from './component/yourbookfavor/yourbookfavor.component';
+import { UpdateprofileComponent } from './component/updateprofile/updateprofile.component';
 
 
 const routes: Routes = [
@@ -77,7 +78,8 @@ const routes: Routes = [
       { path: 'episode', component: EpisodeComponent },
       { path: 'lishepisodeinniyay', component: ListepisodeinniyayComponent },
       { path: 'page404', component: PagenotfoundComponent },
-      { path: '**', component: PagenotfoundComponent }
+      { path: 'editprofile', component: UpdateprofileComponent },
+      { path: '**', component: PagenotfoundComponent },
     ]
   },
   { path: '**', component: PagenotfoundComponent }

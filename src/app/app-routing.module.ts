@@ -76,7 +76,7 @@ const routes: Routes = [
         ]
       },
       { path: 'episode', component: EpisodeComponent },
-      { path: 'lishepisodeinniyay', component: ListepisodeinniyayComponent },
+      { path: 'listepisodeinniyay', component: ListepisodeinniyayComponent },
       { path: 'page404', component: PagenotfoundComponent },
       { path: 'editprofile', component: UpdateprofileComponent },
       { path: '**', component: PagenotfoundComponent },

@@ -60,7 +60,7 @@ export class NiyaynewComponent implements OnInit {
 
   onClickService(book: Book) {
     console.log(book);
-    this.router.navigate(['home/lishepisodeinniyay'], { queryParams: { id_book: book.id_book } })
+    this.router.navigate(['home/listepisodeinniyay'], { queryParams: { id_book: book.id_book } })
 
   }
 

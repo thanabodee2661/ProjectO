@@ -8,6 +8,7 @@ import { EmailService } from '../../service/email/email.service';
 import Swal from 'sweetalert2';
 import { DepFlags } from '@angular/compiler/src/core';
 import { splitDepsDsl } from '@angular/core/src/view/util';
+import { log } from 'util';
 
 @Component({
   selector: 'app-nav',
@@ -55,18 +56,18 @@ export class NavComponent implements OnInit {
 
   login() {
     this.loginService.login(this.user, (dataAuth) => {
-
+      console.log(dataAuth);
+      
       if (dataAuth) {
         console.log("38 nav");
         this.status_login = dataAuth;
         this.jwt.getDecodedAccessToken(localStorage.getItem('auth'), (user) => {
           if (user) {
             console.log(user);
-            // this.user.panname = user.panname;
             this.user = user;
             this.sendUserNav();
+            this.modalService.dismissAll();
           }
-          this.modalService.dismissAll();
         });
 
       } else {
@@ -115,7 +116,10 @@ export class NavComponent implements OnInit {
 
   checkLogout() {
     let url = this.router.url.split('/');
+
+    console.log(url)
     let checkURL = url.find(this.findPath)
+    console.log(checkURL)
     if(checkURL != null){
       this.router.navigateByUrl('/home/page404')
     }

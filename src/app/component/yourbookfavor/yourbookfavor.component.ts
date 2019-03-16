@@ -38,7 +38,7 @@ export class YourbookfavorComponent implements OnInit {
   }
 
   clickChangePage(id_book) {
-    this.router.navigate(['home/lishepisodeinniyay'], { queryParams: { id_book: id_book } })
+    this.router.navigate(['home/listepisodeinniyay'], { queryParams: { id_book: id_book } })
   }
 
 }

@@ -15,6 +15,7 @@ export class CreateepisodeComponent implements OnInit {
 
   episode: Episode = new Episode();
   user: User;
+  show: number = 0;
 
   constructor(private route: ActivatedRoute, private bookService: BookService, private userService: UserService, private router: Router) { }
 
@@ -23,7 +24,7 @@ export class CreateepisodeComponent implements OnInit {
     this.userService.userCurrent.subscribe(user => {
       this.user = user;
       if (user.books == null) {
-        this.router.navigateByUrl('/home/profile/listyourniyay')
+        this.show = 1;
       }
     })
   }
@@ -73,6 +74,10 @@ export class CreateepisodeComponent implements OnInit {
       })
     }
 
+  }
+
+  backToYourListNiyay() {
+    this.router.navigateByUrl('/home/profile/listyourniyay');
   }
 
 }

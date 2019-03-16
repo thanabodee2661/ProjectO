@@ -15,7 +15,7 @@ export class UpdateepisodeComponent implements OnInit {
 
   episode: Episode = new Episode()
   user: User;
-
+  show: number = 0;
   constructor(private episodeService: EpisodeService, private route: ActivatedRoute, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class UpdateepisodeComponent implements OnInit {
           this.episode = episode;
         })
       } else {
-        this.router.navigateByUrl('/home/profile/listyourniyay')
+        this.show = 1;
       }
     })
 
@@ -53,7 +53,7 @@ export class UpdateepisodeComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
           this.episodeService.updateEpisode(this.episode).subscribe(status => {
-            if(status > 0){
+            if (status > 0) {
               Swal.fire({
                 type: 'success',
                 title: 'แก้ไขสำเร็จ',
@@ -62,7 +62,7 @@ export class UpdateepisodeComponent implements OnInit {
                 position: 'top-end',
                 showConfirmButton: false,
               })
-            }else{
+            } else {
               Swal.fire({
                 type: 'error',
                 title: 'แก้ไขไม่สำเร็จ',
@@ -76,6 +76,10 @@ export class UpdateepisodeComponent implements OnInit {
         }
       })
     }
+  }
+
+  backToYourListNiyay() {
+    this.router.navigateByUrl('/home/profile/listyourniyay');
   }
 
 }

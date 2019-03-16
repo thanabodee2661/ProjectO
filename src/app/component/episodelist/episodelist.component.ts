@@ -15,21 +15,21 @@ export class EpisodelistComponent implements OnInit {
 
   episodes: Array<Episode>
   user: User
-
+  show: number = 0;
   constructor(private route: ActivatedRoute, private router: Router, private bookService: BookService, private episodeService: EpisodeService, private userService: UserService) { }
 
   ngOnInit() {
-    // this.route.snapshot.queryParamMap.get('id')
+
     this.userService.userCurrent.subscribe(user => {
       this.user = user;
       if (user.books != null) {
+        console.log('28 le');
         this.bookService.getEpisodeByID(this.route.snapshot.queryParamMap.get('id_book'), user.id_user).subscribe(episodes => {
           this.episodes = episodes;
           console.log(episodes);
-
         })
       } else {
-        this.router.navigateByUrl('/home/profile/listyourniyay')
+        this.show = 1;
       }
     })
   }
@@ -41,5 +41,9 @@ export class EpisodelistComponent implements OnInit {
   updateEpisode(episode: Episode) {
     console.log(episode);
     this.episodeService.changeEpisode(episode);
+  }
+
+  backToYourListNiyay() {
+    this.router.navigateByUrl('/home/profile/listyourniyay');
   }
 }

@@ -43,8 +43,6 @@ export class ListyourniyayComponent implements OnInit {
   }
 
   deleteBookByID(id, i) {
-
-
     Swal.fire({
       title: 'ยืนยันการลบ',
       type: 'question',

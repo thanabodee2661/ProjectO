@@ -30,6 +30,8 @@ export class ProfileComponent implements OnInit {
   }
 
   onClickChangePage(page: string) {
+    console.log(page);
+    
     this.router.navigateByUrl('home/profile/' + page);
   }
 

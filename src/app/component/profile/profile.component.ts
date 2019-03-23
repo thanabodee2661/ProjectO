@@ -17,21 +17,21 @@ export class ProfileComponent implements OnInit {
   constructor(private userService: UserService, private router: Router, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.userService.userCurrent.subscribe(user => {
-      console.log(user);
-      this.user = user;
-      if(user.avatar != null){
-        this.imgProfile = "http://localhost:9999/img/" + user.id_user + "/" + user.avatar;
-      }else{
-        this.imgProfile = "../../../assets/img/person.png";
-      }
-      
-    })
+    if (localStorage.getItem('auth') != '' && localStorage.getItem('auth') != null) { // ถ้าเข้าโปรแกรมมาแล้วมีการล้อคอินค้างไว้
+      this.userService.userCurrent.subscribe(user => {
+        this.user = user;
+        if (user.avatar != null) {
+          this.imgProfile = "http://localhost:9999/img/" + user.id_user + "/" + user.avatar;
+        } else {
+          this.imgProfile = "../../../assets/img/person.png";
+        }
+      })
+    } else {
+      this.router.navigateByUrl('home/page404');
+    }
   }
 
   onClickChangePage(page: string) {
-    console.log(page);
-    
     this.router.navigateByUrl('home/profile/' + page);
   }
 

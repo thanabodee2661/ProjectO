@@ -21,13 +21,13 @@ export class EpisodeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private episodeService: EpisodeService, private commentservice: CommentreportService, private userService: UserService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('auth') != '' && localStorage.getItem('auth') != null) {
+    if (localStorage.getItem('auth') != '' && localStorage.getItem('auth') != null) { //เช้คว่ามีการล้อคอินหรือไม่
       this.checklogin = true;
     }
-    this.userService.userCurrent.subscribe(result => {
+    this.userService.userCurrent.subscribe(result => { // get ค่า user
       this.id_user = result.id_user;
     })
-    this.episodeService.getEpisodeByIDEpisode(this.route.snapshot.queryParamMap.get('id_episode')).subscribe(episode => {
+    this.episodeService.getEpisodeByIDEpisode(this.route.snapshot.queryParamMap.get('id_episode')).subscribe(episode => { //get episode จาก เบส
       this.episode = episode;
       this.episode.view = this.episode.view + 1;
       this.viewPlus();
@@ -37,8 +37,7 @@ export class EpisodeComponent implements OnInit {
   }
 
   viewPlus() {
-    this.episodeService.updateEpisodeView(this.episode).subscribe(result => {
-      console.log(result);
+    this.episodeService.updateEpisodeView(this.episode).subscribe(() => {
 
     })
   }
@@ -47,7 +46,7 @@ export class EpisodeComponent implements OnInit {
     this.commentservice.insertcomment(collect, result => {
       if (result) {
         this.commentservice.insertusercomment(this.id_user, result, this.episode.id_book, this.episode.id_episode, end => {
-          alert("success");
+          // alert("success");
         })
       }
     })

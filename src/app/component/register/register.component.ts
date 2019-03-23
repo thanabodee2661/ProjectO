@@ -19,23 +19,23 @@ export class RegisterComponent implements OnInit {
   constructor(private router: Router, private registerService: RegisterService) { }
 
   ngOnInit() {
+    if (localStorage.getItem('auth') != '' && localStorage.getItem('auth') != null) { // ถ้าเข้าโปรแกรมมาแล้วมีการล้อคอินค้างไว้
+      this.router.navigateByUrl('home/page404');
+    }
   }
 
-  changeFile = (e) => {
-    console.log(e.target.files[0]);
-    this.file = e.target.files[0];
-    this.user.avatar = e.target.files[0].name
+  changeFile = (e) => { //เปลีย่น ไฟล์ ภาพ 
+    this.file = e.target.files[0]; //เก้บ file ที่เลือก
+    this.user.avatar = e.target.files[0].name // เก้บชื่อไฟล์ ที่เลือก
     const reader = new FileReader();
-    reader.onload = () => {
+    reader.onload = () => { //preview รูป ที่เลือก
       this.imagePreview = reader.result as string;
     };
 
-    reader.readAsDataURL(this.file);
+    reader.readAsDataURL(this.file); //preview รูป ที่เลือก
   }
 
-  onClickService() {
-    console.log(this.user);
-
+  onClickService() { // เมื่อกดปุ่ม register
     Swal.fire({
       title: 'ยืนยันการสมัคร',
       type: 'question',
@@ -46,8 +46,7 @@ export class RegisterComponent implements OnInit {
       cancelButtonText: 'ยกเลิก',
     }).then((result) => {
       if (result.value) {
-        this.registerService.createUser(this.user, this.file).subscribe(data => {
-          console.log(data);
+        this.registerService.createUser(this.user, this.file).subscribe(data => { // เรียกใช้ service เพื่อ create  ข้อมูล
           if (data > 0) {
             Swal.fire({
               type: 'success',

@@ -17,13 +17,11 @@ export class RouteComponent implements OnInit {
 
   }
 
-  getUser(user) {
+  getUser(user) { // setค่า user ที่ได้จาก nav ไว้กับ service
     if (typeof (user.id_user) != 'undefined') {
-      this.userService.getFavorBook(user.id_user).subscribe(book_favor => {
+      this.userService.getFavorBook(user.id_user).subscribe(book_favor => { // get หนังสือที่ติดตามไว่
         user.favor = book_favor;
-        console.log(user);
-
-        this.userService.changeUser(user);
+        this.userService.changeUser(user); 
       })
     } else {
       this.userService.changeUser(user);

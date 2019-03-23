@@ -24,18 +24,22 @@ export class UpdateprofileComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.userService.userCurrent.subscribe(user => {
-      this.user = user;
-      this.name = user.name
-      this.lastname = user.lastname
-      this.birthday = user.birthday
-      this.panname = user.panname
-      if (user.avatar != null) {
-        this.imagePreview = "http://localhost:9999/img/" + user.id_user + "/" + user.avatar;
-      } else {
-        this.imagePreview = "../../../assets/img/person.png";
-      }
-    })
+    if (localStorage.getItem('auth') != '' && localStorage.getItem('auth') != null) { // ถ้าเข้าโปรแกรมมาแล้วมีการล้อคอินค้างไว้
+      this.userService.userCurrent.subscribe(user => { // get ค่า user จาก service
+        this.user = user;
+        this.name = user.name
+        this.lastname = user.lastname
+        this.birthday = user.birthday
+        this.panname = user.panname
+        if (user.avatar != null) {
+          this.imagePreview = "http://localhost:9999/img/" + user.id_user + "/" + user.avatar; // set path รูป
+        } else {
+          this.imagePreview = "../../../assets/img/person.png";  // set path รูป
+        }
+      })
+    } else {
+      this.router.navigateByUrl('home/page404');
+    }
   }
 
   changeFile = (e) => {
@@ -50,7 +54,7 @@ export class UpdateprofileComponent implements OnInit {
     reader.readAsDataURL(this.file);
   }
 
-  onClickService() {
+  onClickService() { // เรียก service แก้ไข ข้อมูล
     Swal.fire({
       title: 'ยืนยันการแก้ไข',
       type: 'question',
@@ -66,7 +70,7 @@ export class UpdateprofileComponent implements OnInit {
         this.user.birthday = this.birthday
         this.user.lastname = this.lastname
         this.userService.updateUser(this.user, this.file).subscribe(data => {
-          if(data['auth'] != null){
+          if (data['auth'] != null) {
             localStorage.setItem('auth', data['auth'])
             Swal.fire({
               type: 'success',
@@ -83,12 +87,12 @@ export class UpdateprofileComponent implements OnInit {
               confirmButtonColor: '#3085d6',
               confirmButtonText: 'OK',
             }).then((result) => {
-              if(result.value){
+              if (result.value) {
                 this.router.navigateByUrl('/home')
               }
             })
 
-          }else{
+          } else {
             Swal.fire({
               type: 'error',
               title: 'แก้ไขไม่สำเร็จ',

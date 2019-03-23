@@ -5,6 +5,7 @@ import { User } from 'src/app/model/user/user.model';
 import { BookService } from 'src/app/service/book/book.service';
 import { Typebook } from 'src/app/model/typebook/typebook';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createyourniyay',
@@ -21,25 +22,23 @@ export class CreateyourniyayComponent implements OnInit {
   typebooks: Array<Typebook>;
   temptypebook: Array<Typebook> = new Array<Typebook>();
 
-  constructor(private userService: UserService, private bookService: BookService) { }
+  constructor(private userService: UserService, private bookService: BookService, private router: Router) { }
 
   ngOnInit() {
-    console.log(this.temptypebook);
-
-    this.userService.userCurrent.subscribe(user => {
-      this.user = user;
-      console.log(user);
-
-    })
-    this.bookService.getTypeBook().subscribe(typebook => {
-      this.typebooks = typebook;
-    })
+    if (localStorage.getItem('auth') != '' && localStorage.getItem('auth') != null) { // ถ้าเข้าโปรแกรมมาแล้วมีการล้อคอินค้างไว้
+      this.userService.userCurrent.subscribe(user => { //เรียก service เพื่อ get ค่า user ที่เก็บไว้
+        this.user = user;
+      })
+      this.bookService.getTypeBook().subscribe(typebook => { //เรียก service เพื่อ get ค่า ประเภทหนังสือ จากเบส
+        this.typebooks = typebook;
+      })
+    } else {
+      this.router.navigateByUrl('home/page404');
+    }
   }
 
-  changeFile = (e) => {
-    console.log(e.target.files[0]);
+  changeFile = (e) => { //เลือกรูป
     this.file = e.target.files[0];
-    // this.user.avatar = e.target.files[0].name
     this.book.img_book = e.target.files[0].name;
     const reader = new FileReader();
     reader.onload = () => {
@@ -49,9 +48,7 @@ export class CreateyourniyayComponent implements OnInit {
   }
 
   createBook() {
-    // console.log(this.book);
-
-    if (this.book.name_fiction == null || this.temptypebook.length == 0 || this.book.preview == null) {
+    if (this.book.name_fiction == null || this.temptypebook.length == 0 || this.book.preview == null) { //เช้คว่ากรอกค่ามาทั้งช่องไหม
       Swal.fire({
         title: 'กรุณากรอกข้อมูลให้ครบทุกช่อง',
         type: 'warning'
@@ -75,8 +72,7 @@ export class CreateyourniyayComponent implements OnInit {
           formData.append('typebooks', JSON.stringify(this.temptypebook))
           formData.append('file', this.file)
 
-          this.bookService.createBook(formData).subscribe(data => {
-            console.log(data);
+          this.bookService.createBook(formData).subscribe(data => { //เรียก service สร้าง หนังสือ
             if (data > 0) {
               Swal.fire({
                 type: 'success',
@@ -102,20 +98,14 @@ export class CreateyourniyayComponent implements OnInit {
     }
   }
 
-  onChangeTypeView($event) {
-    console.log($event.target.value);
-    this.temptypebook.push(this.typebooks[$event.target.value])
-    this.typebooks.splice($event.target.value, 1)
-    console.log(this.temptypebook);
-    console.log(this.typebooks);
-
-
+  onChangeTypeView($event) { //เมื่อมีการเลือก type book 
+    this.temptypebook.push(this.typebooks[$event.target.value]) //แอดค่าเข้าไปใน array อันใหม่ 
+    this.typebooks.splice($event.target.value, 1) // ลบข้อมูลจาก array อันเดิม
   }
 
-  onClickExitType(i) {
-    this.typebooks.push(this.temptypebook[i]);
-    this.temptypebook.splice(i, 1);
-
+  onClickExitType(i) { //เมื่อมีการลบ typebook ออก
+    this.typebooks.push(this.temptypebook[i]); //แอดค่าเข้าไปใน array อันเดิม 
+    this.temptypebook.splice(i, 1); // ลบข้อมูลจาก array อันใหม่
   }
 
 

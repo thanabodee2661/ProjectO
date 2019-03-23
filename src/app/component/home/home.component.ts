@@ -28,55 +28,51 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.userCurrent.subscribe(user => {
+    this.userService.userCurrent.subscribe(user => { //get user จาก service
       console.log(user);
     })
-    this.bookService.getBookByOrder(0, 5).subscribe(books => {
+    this.bookService.getBookByOrder(0, 5).subscribe(books => { //get หนังสือใหม่จากเบส
       this.books_newfilter = books;
       books.forEach((book, i) => {
         if (book.img_book) {
-          this.books_newfilter[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
+          this.books_newfilter[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book; /// set path รูป
         } else {
-          this.books_newfilter[i].img_book = "../../../assets/img/book.png";
+          this.books_newfilter[i].img_book = "../../../assets/img/book.png";/// set path รูป
         }
       })
     })
-    this.bookService.getTypeBook().subscribe(type => {
+    this.bookService.getTypeBook().subscribe(type => { // get type หนังสือ
       this.typebooks = type
     })
-    this.bookService.getBookByOrderView(0, 5).subscribe(books => {
+    this.bookService.getBookByOrderView(0, 5).subscribe(books => { //get หนัง วิวเยอะจากเบส
       this.books_viewfilter = books;
       books.forEach((book, i) => {
         if (book.img_book) {
-          this.books_viewfilter[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
+          this.books_viewfilter[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book; /// set path รูป
         } else {
-          this.books_viewfilter[i].img_book = "../../../assets/img/book.png";
+          this.books_viewfilter[i].img_book = "../../../assets/img/book.png"; /// set path รูป
         }
       })
     })
-    this.bookService.getBookByOrderView(0, 10).subscribe(books => {
+    this.bookService.getBookByOrderView(0, 10).subscribe(books => { //get หนัง วิวเยอะจากเบส
       this.guidebooks = books;
       books.forEach((book, i) => {
         if (book.img_book) {
-          this.guidebooks[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book;
+          this.guidebooks[i].img_book = 'http://localhost:9999/imagebook/' + book.id_book + '/' + book.img_book; /// set path รูป
         } else {
-          this.guidebooks[i].img_book = "../../../assets/img/book.png";
+          this.guidebooks[i].img_book = "../../../assets/img/book.png"; /// set path รูป
         }
       })
     })
   }
 
   onClickService(book: Book) {
-    console.log(book);
-    this.router.navigate(['home/listepisodeinniyay'], { queryParams: { id_book: book.id_book } })
-
+    this.router.navigate(['home/listepisodeinniyay'], { queryParams: { id_book: book.id_book } }) // เปลี่ยนไปหน้าอ่านนิยาย
   }
 
-  onChangeType($event) {
-    console.log($event.target.value);
+  onChangeType($event) { //เมื่อเปลี่ยน type ของหนังสือใหม่ จะกรองเอาแต่ละ type มาอย่างละ 5
     if ($event.target.value == 0) {
       this.bookService.getBookByOrder(0, 5).subscribe(books => {
-        console.log(books);
         this.books_newfilter = books;
         books.forEach((book, i) => {
           if (book.img_book) {
@@ -88,7 +84,6 @@ export class HomeComponent implements OnInit {
       })
     } else {
       this.bookService.getBookByOrderType($event.target.value, 0, 5).subscribe(books => {
-        console.log(books)
         this.books_newfilter = books;
         books.forEach((book, i) => {
           if (book.img_book) {
@@ -101,7 +96,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onChangeTypeView($event) {
+  onChangeTypeView($event) { //เมื่อเปลี่ยน type ของหนังสือวิวเยอะ จะกรองเอาแต่ละ type มาอย่างละ 5
     if ($event.target.value == 0) {
       this.bookService.getBookByOrderView(0, 5).subscribe(books => {
         this.books_viewfilter = books;

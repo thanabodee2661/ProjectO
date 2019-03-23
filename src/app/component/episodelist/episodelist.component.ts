@@ -19,31 +19,27 @@ export class EpisodelistComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private bookService: BookService, private episodeService: EpisodeService, private userService: UserService) { }
 
   ngOnInit() {
-
-    this.userService.userCurrent.subscribe(user => {
-      this.user = user;
-      if (user.books != null) {
-        console.log('28 le');
-        this.bookService.getEpisodeByID(this.route.snapshot.queryParamMap.get('id_book'), user.id_user).subscribe(episodes => {
-          this.episodes = episodes;
-          console.log(episodes);
-        })
-      } else {
-        this.show = 1;
-      }
-    })
+    if (localStorage.getItem('auth') != '' && localStorage.getItem('auth') != null) { // ถ้าเข้าโปรแกรมมาแล้วมีการล้อคอินค้างไว้
+      this.userService.userCurrent.subscribe(user => { //get ค่า user จาก service
+        this.user = user;
+        if (user.books != null) {
+          this.bookService.getEpisodeByID(this.route.snapshot.queryParamMap.get('id_book'), user.id_user).subscribe(episodes => { // get episode ทั้งหมด จาก id_book และ id_user
+            this.episodes = episodes;
+          })
+        } else {
+          this.show = 1;
+        }
+      })
+    } else {
+      this.router.navigateByUrl('home/page404');
+    }
   }
 
-  clickChangeComponent() {
+  clickChangeComponent() { //เปลี่ยน หน้าไปหน้า สร้าง episode
     this.router.navigate(['home/profile/createepisode'], { queryParams: { id: this.route.snapshot.queryParamMap.get('id_book') } })
   }
 
-  updateEpisode(episode: Episode) {
-    console.log(episode);
-    this.episodeService.changeEpisode(episode);
-  }
-
-  backToYourListNiyay() {
+  backToYourListNiyay() { //กลับไปหน้านิยาายของคุณ
     this.router.navigateByUrl('/home/profile/listyourniyay');
   }
 }

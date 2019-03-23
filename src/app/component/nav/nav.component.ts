@@ -26,72 +26,65 @@ export class NavComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private router: Router, private loginService: LoginService, private jwt: JwtService, private emailservice: EmailService) { }
 
-  open(content) {
-    console.log(content);
-
+  open(content) { // เปิด modal การล้อคอิน
     this.modalService.open(content);
   }
-
-  changePageRegister() {
-
-    console.log(this.router.url);
-
+ 
+  changePageRegister() { // เปลี่ยนหน้าไปยังหน้า register
     this.router.navigateByUrl('/home/register');
     this.modalService.dismissAll()
   }
 
   ngOnInit() {
-
-    if (localStorage.getItem('auth') != '' && localStorage.getItem('auth') != null) {
-      this.status_login = true;
-      this.jwt.getDecodedAccessToken(localStorage.getItem('auth'), (user) => {
+    if (localStorage.getItem('auth') != '' && localStorage.getItem('auth') != null) { // ถ้าเข้าโปรแกรมมาแล้วมีการล้อคอินค้างไว้
+      this.status_login = true; ///เปลี่ยนปุ่มการแสดงผล
+      this.jwt.getDecodedAccessToken(localStorage.getItem('auth'), (user) => { /// get ค่า user ที่เข้ารหัสไว้ ออกมาจาก localstorage
         if (user) {
-          console.log(user);
-          this.user = user;
-          this.sendUserNav();
+          this.user = user;  //set ค่า ให้กับ user
+          this.sendUserNav(); // ส่งค่า user ไปทุกหน้า
         }
       });
     }
   }
-
-  login() {
+ 
+  login() {  //เรียกใช้ service login เพื่อเช้คค่า email และ password
     this.loginService.login(this.user, (dataAuth) => {
-      console.log(dataAuth);
-      
-      if (dataAuth) {
-        console.log("38 nav");
-        this.status_login = dataAuth;
-        this.jwt.getDecodedAccessToken(localStorage.getItem('auth'), (user) => {
+      if (dataAuth) {  // email และ pass ถูกต้อง
+        this.status_login = dataAuth; // เปลี่ยนปุ่มแสดงผล
+        this.jwt.getDecodedAccessToken(localStorage.getItem('auth'), (user) => { /// get ค่า user ที่เข้ารหัสไว้ ออกมาจาก localstorage
           if (user) {
-            console.log(user);
-            this.user = user;
-            this.sendUserNav();
-            this.modalService.dismissAll();
+            this.user = user; //set ค่า ให้กับ user
+            this.sendUserNav(); // ส่งค่า user ไปทุกหน้า
+            this.modalService.dismissAll(); //ทำลาย model
           }
         });
-
-      } else {
-        this.status_login = dataAuth;
+      } else { // ถ้า email หรือ password ผิด
+        Swal.fire({ // แสดง sweet alert 
+          type: 'error',
+          title: 'email หรือ password ผิด',
+          showConfirmButton: true,
+          confirmButtonText: 'OK'
+        }).then(() => {
+          this.status_login = dataAuth;
+        })
       }
     });
   }
 
   logout() {
-
-    this.loginService.logout();
-    this.status_login = false;
-    this.user = new User();
-    console.log(this.user);
-    this.sendUserNav();
-    this.checkLogout();
+    this.loginService.logout(); //เรียกใช้เซอวิสlogout เพื่อทำลาย auth ใน localstorage
+    this.status_login = false; //เปลี่ยนการแสดงผลปุ่ม
+    this.user = new User(); //set user เป็น null
+    this.sendUserNav(); // ส่งค่า user ไปยังหน้าอื่นๆ
+    this.checkLogout(); // ทุกครั้งที่ ล้อคเอ้า จะเช้ค พาท ว่ายุในหน้า profile ไหม ถ้าอยู่ ให้ render page404 
   }
 
   onClickChangePage(path: string) {
-    this.router.navigateByUrl("/home/" + path);
+    this.router.navigateByUrl("/home/" + path); // เปลี่ยนหน้าไปยัง page ต่างๆ
   }
 
   sendUserNav() {
-    this.getuser.emit(this.user);
+    this.getuser.emit(this.user); // ส่งค่า user ไปยังหน้าอื่นๆ โดยส่งกลับไปที่หน้า route แล้ว set ค่าไว้ที่ service
   }
 
   forgotpass() {
@@ -115,13 +108,10 @@ export class NavComponent implements OnInit {
   }
 
   checkLogout() {
-    let url = this.router.url.split('/');
-
-    console.log(url)
-    let checkURL = url.find(this.findPath)
-    console.log(checkURL)
-    if(checkURL != null){
-      this.router.navigateByUrl('/home/page404')
+    let url = this.router.url.split('/'); // ตัดสตริงตาม /
+    let checkURL = url.find(this.findPath) // เช้คสตริงที่ได้จากการตัด ว่าตรงกับ profile ไหม
+    if (checkURL != null) { //ถ้าตรง
+      this.router.navigateByUrl('/home/page404')// ไปหน้า page 404
     }
   }
 

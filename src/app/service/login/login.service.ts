@@ -12,7 +12,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(user: User, callback) {
-    this.http.post(this.url, user).subscribe(data => {
+    this.http.post(this.url, user).subscribe((data) => {
       console.log(data);
       if (data["auth"] != null) {
         localStorage.setItem('auth', data["auth"]);
@@ -20,7 +20,6 @@ export class LoginService {
       }else{
         return callback(false);
       }
-     
     })
   }
 

@@ -19,23 +19,27 @@ export class UpdateepisodeComponent implements OnInit {
   constructor(private episodeService: EpisodeService, private route: ActivatedRoute, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
+    if (localStorage.getItem('auth') != '' && localStorage.getItem('auth') != null) { // ถ้าเข้าโปรแกรมมาแล้วมีการล้อคอินค้างไว้
+      this.userService.userCurrent.subscribe(user => { // get ค่า user จาก service
+        this.user = user;
+        if (user.books != null) {
+          this.episodeService.getEpisodeByIDEpisode(this.route.snapshot.paramMap.get('id')).subscribe(episode => { //get รายละเอียด ของepisode
+            this.episode = episode;
+          })
+        } else {
+          this.show = 1;
+        }
+      })
+    }else {
+      this.router.navigateByUrl('home/page404');
+    }
 
-    this.userService.userCurrent.subscribe(user => {
-      this.user = user;
-      if (user.books != null) {
-        this.episodeService.getEpisodeByIDEpisode(this.route.snapshot.paramMap.get('id')).subscribe(episode => {
-          this.episode = episode;
-        })
-      } else {
-        this.show = 1;
-      }
-    })
 
   }
 
   updataEpisode() {
 
-    if (this.episode.content == '' || this.episode.name_episode == '') {
+    if (this.episode.content == '' || this.episode.name_episode == '') { //เช้คช่องว่าง
       Swal.fire({
         title: 'กรุณากรอกข้อมูลให้ครบทุกช่อง',
         type: 'warning',
@@ -78,7 +82,7 @@ export class UpdateepisodeComponent implements OnInit {
     }
   }
 
-  backToYourListNiyay() {
+  backToYourListNiyay() { //กลับไปหน้านิยายของคุณ
     this.router.navigateByUrl('/home/profile/listyourniyay');
   }
 

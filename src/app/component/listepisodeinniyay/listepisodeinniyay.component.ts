@@ -21,15 +21,11 @@ export class ListepisodeinniyayComponent implements OnInit {
   constructor(private bookService: BookService, private episodeService: EpisodeService, private route: ActivatedRoute, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    console.log(this.route.snapshot.queryParamMap.get("id_book"));
-    this.userService.userCurrent.subscribe(user => {
+    this.userService.userCurrent.subscribe(user => {// get user จาก service
       this.user = user;
-      console.log(user);
-
     })
-    this.bookService.getBookByID(this.route.snapshot.queryParamMap.get("id_book")).subscribe(book => {
+    this.bookService.getBookByID(this.route.snapshot.queryParamMap.get("id_book")).subscribe(book => { //get book จาก id_book จากเบส
       this.book = book[0];
-      console.log(book[0]);
       if (book[0].img_book) {
         this.book.img_book = 'http://localhost:9999/imagebook/' + book[0].id_book + '/' + book[0].img_book;
       } else {
@@ -40,10 +36,7 @@ export class ListepisodeinniyayComponent implements OnInit {
   }
 
   loadEpisode() {
-    console.log(this.book.episode.length);
     this.episodeService.getEpisodeByIDOrder(this.book.id_book, this.book.episode.length).subscribe(episodes => {
-      console.log(episodes);
-
       episodes.forEach(episode => {
         this.book.episode.push(episode);
       })
@@ -83,8 +76,6 @@ export class ListepisodeinniyayComponent implements OnInit {
         bookTemp.id_user = this.book.id_user;
 
         this.user.favor.push(bookTemp);
-        console.log(this.user);
-
       }
     })
   }
@@ -93,8 +84,6 @@ export class ListepisodeinniyayComponent implements OnInit {
     this.userService.deleteUserFavorBook(this.user.id_user, this.book.id_book).subscribe(result => {
       if (result > 0) {
         this.user.favor.splice(this.indexBookFavor, 1)
-        console.log(this.user);
-
       }
     })
   }
